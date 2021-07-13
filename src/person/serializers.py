@@ -1,5 +1,6 @@
+from django.db.models import fields
 from rest_framework import serializers
-from .models import NewUser
+from .models import NewUser,Student
 from rest_framework.authtoken.models import Token
 
 
@@ -15,3 +16,8 @@ class UserSerializer(serializers.ModelSerializer):
         User.save()
         Token.objects.create(user=User)
         return User
+class studentSerializer(serializers.ModelSerializer):
+    course_name = serializers.CharField(required=False)
+    class Meta:
+        model=Student
+        fields=('user','name','enr_num','course','course_name')
