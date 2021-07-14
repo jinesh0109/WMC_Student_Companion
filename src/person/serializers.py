@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NewUser
-        fields = ( 'email','password')
+        fields = ( 'email','password','is_superuser','is_student')
     def create(self, validated_data):
         User = super(UserSerializer, self).create(validated_data)
         User.set_password(validated_data['password'])
@@ -17,7 +17,8 @@ class UserSerializer(serializers.ModelSerializer):
         Token.objects.create(user=User)
         return User
 class studentSerializer(serializers.ModelSerializer):
-    course_name = serializers.CharField(required=False)
+    course= serializers.StringRelatedField(many=True)
     class Meta:
         model=Student
-        fields=('user','name','enr_num','course','course_name')
+        fields = '__all__'
+    

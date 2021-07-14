@@ -18,7 +18,7 @@ class course(models.Model):
     name=models.CharField(max_length=100)
     description=models.TextField()
     credit=models.IntegerField()
-    faculty=models.ForeignKey(Faculty,on_delete=models.SET_NULL,null=True)
+    faculty=models.ForeignKey(Faculty,on_delete=models.SET_NULL,null=True,blank=True)
     cat=models.ManyToManyField(category)
     building=models.ForeignKey(Building,on_delete=models.CASCADE)
     def __str__(self):
