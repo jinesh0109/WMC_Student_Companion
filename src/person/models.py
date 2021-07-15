@@ -41,7 +41,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=True)
     is_superuser=models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    is_student= models.BooleanField(default=False)
+    is_student= models.BooleanField(default=True)
     
 
     objects = CustomAccountManager()
@@ -57,7 +57,7 @@ class Student(models.Model):
     user=models.OneToOneField(NewUser,on_delete=models.CASCADE)
     name = models.CharField(max_length=150, unique=True)
     enr_num=models.CharField(max_length=50,unique=True)
-    course=models.ManyToManyField('course.course')
+    course=models.ManyToManyField('course.course',blank=True,null=True)
     def __str__(self) :
         return self.name
 

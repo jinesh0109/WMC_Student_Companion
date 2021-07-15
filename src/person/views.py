@@ -6,24 +6,32 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import TokenAuthentication,SessionAuthentication
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from .models import NewUser,Student
 from .serializers import UserSerializer,studentSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-
-
+from rest_framework import viewsets
+from course.models import course
 
 # generics.CreateAPIView,ListView,generics.RetrieveAPIView,generics.RetrieveDestroyAPIView
 
 #to create a user
 class CreateUserAPIView(generics.CreateAPIView):
     authentication_classes=[TokenAuthentication,]
-    # permission_classes=[IsAuthenticated,]
+    permission_classes=[IsAuthenticated,]
     queryset = NewUser.objects.all()
     serializer_class = UserSerializer
+    def post(self, request, *args, **kwargs):
+        # print(request.headers)
+
+        if( request.user.is_student):
+            return HttpResponse('Unauthorized', status=401)
+        return self.create(request, *args, **kwargs)
+
+
 class particular_student(generics.ListAPIView):
     authentication_classes=[TokenAuthentication,]
     permission_classes=[IsAuthenticated,]
@@ -42,11 +50,52 @@ class particular_student(generics.ListAPIView):
 
 
 
-class studentList(generics.ListAPIView):
-    authentication_classes=[TokenAuthentication,]
+# class studentList(generics.ListCreateAPIView):
+#     authentication_classes=[TokenAuthentication,SessionAuthentication,]
+#     permission_classes=[IsAuthenticated,]
+#     queryset=Student.objects.all()
+#     # serializer_class=studentSerializer
+#     def get(self, request, *args, **kwargs):
+#         serializer_class=studentSerializer
+#         if(request.user.is_student):
+#             return HttpResponse('Unauthorized', status=401)
+
+#         return self.list(request, *args, **kwargs)
+#     def post(self, request, *args, **kwargs):
+        
+#         user = NewUser.objects.get(email=request.data["email"])
+#         # print(user)
+#         serializer_class1=studentSerializer(data=request.data)
+        
+#         print(request.data)
+#         if serializer_class1.is_valid():
+#             serializer_class1.save()
+
+#         if(request.user.is_student):
+#             return HttpResponse('Unauthorized', status=401)
+#         return self.create(request, *args, **kwargs)
+
+class studentList(generics.ListCreateAPIView):
+    authentication_classes=[TokenAuthentication,SessionAuthentication,]
+    permission_classes=[IsAuthenticated,]
     queryset=Student.objects.all()
     serializer_class=studentSerializer
+    def get(self, request, *args, **kwargs):
+        
+        if(request.user.is_student):
+            return HttpResponse('Unauthorized', status=401)
 
+        return self.list(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        
+        user = NewUser.objects.get(email=request.data["email"])
+        course1=course.objects.all()
+        request.data['user']=user.id
+        request.data['course']=course1
+        
+        if(request.user.is_student):
+            return HttpResponse('Unauthorized', status=401)
+        return self.create(request, *args, **kwargs)
 
 class getUserDetailFromAuth(ObtainAuthToken):
     def post(self, request, *args, **kwargs):

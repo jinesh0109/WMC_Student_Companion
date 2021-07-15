@@ -11,6 +11,7 @@ urlpatterns = [
     path('token',getUserDetailFromAuth.as_view()),
     path('register/',CreateUserAPIView.as_view()),
     path('students/',studentList.as_view()),
+    # path('students/',studentList.as_view({'get': 'list'})),
     # path('student/<int:pk>/',particular_student.as_view()),
     path('student/profile/',particular_student.as_view()),
     

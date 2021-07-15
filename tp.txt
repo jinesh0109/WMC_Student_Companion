@@ -1,0 +1,1 @@
+private routing between admin & student
