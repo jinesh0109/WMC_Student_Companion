@@ -32,6 +32,8 @@ class CreateUserAPIView(generics.CreateAPIView):
         return self.create(request, *args, **kwargs)
 
 
+
+
 class particular_student(generics.ListAPIView):
     authentication_classes=[TokenAuthentication,]
     permission_classes=[IsAuthenticated,]
