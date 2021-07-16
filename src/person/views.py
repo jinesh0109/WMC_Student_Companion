@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication,SessionAuthentication
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from .models import NewUser, Programme,Student
-from .serializers import UserSerializer,studentSerializer
+from .serializers import UserSerializer, programeSerializer,studentSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
@@ -107,3 +107,17 @@ class getUserDetailFromAuth(ObtainAuthToken):
             'is_student':user.is_student
             
         })
+
+
+class programmeListCreateClass(generics.ListCreateAPIView):
+    serializer_class=programeSerializer
+    queryset=Programme.objects.all()
+    def get(self, request, *args, **kwargs):
+        if(request.user.is_student):
+            return HttpResponse('Unauthorized', status=401)
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if(request.user.is_student):
+            return HttpResponse('Unauthorized', status=401)
+        return self.create(request, *args, **kwargs)

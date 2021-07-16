@@ -1,5 +1,8 @@
 import React,{useEffect,useState} from 'react';
 import Axios from 'axios';
+
+//components
+import RetrieveStudent from '../../Actions/RetrieveStudent';
 const   Admin_Student=()=>{
     const [studentList,setStudentList]=useState([]);
     const [listItems,setlistItems]=useState([]);
@@ -13,7 +16,8 @@ const   Admin_Student=()=>{
           }).then((res)=>{
             // setStudentList(res.data);
             const students=res.data;
-           setlistItems( students.map((student) =><li key={student.id}>{student.name+" "+student.enr_num}</li>));
+            console.log(students);
+           setlistItems( students.map((student) =><a href={`http://127.0.0.1:8000/person/student/${student.id}/`} key={student.id}>{student.name+" "+student.enr_num+" "+student.course}</a>));
             console.log(res.data);
         })
         

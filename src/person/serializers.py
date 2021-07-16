@@ -1,6 +1,6 @@
 from django.db.models import fields
 from rest_framework import serializers
-from .models import NewUser,Student
+from .models import NewUser, Programme,Student
 from rest_framework.authtoken.models import Token
 
 
@@ -24,14 +24,8 @@ class studentSerializer(serializers.ModelSerializer):
         model=Student
         fields = '__all__'
 
-    # def validate(self, attrs):
 
-    #     print(attrs)
-
-    #     return super().validate(attrs)
-
-    # def create(self, validated_data):
-    #     print(validated_data)
-
-    #     return validated_data
-    
+class programeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Programme
+        fields='__all__'
