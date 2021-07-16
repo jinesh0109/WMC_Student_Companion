@@ -18,6 +18,8 @@ class UserSerializer(serializers.ModelSerializer):
         return User
 class studentSerializer(serializers.ModelSerializer):
     course= serializers.StringRelatedField(many=True,read_only=True)
+    # program= serializers.StringRelatedField(read_only=True)
+    # user= serializers.StringRelatedField(read_only=True)
     class Meta:
         model=Student
         fields = '__all__'

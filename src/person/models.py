@@ -53,17 +53,28 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+
+
+class Programme(models.Model):
+    name = models.CharField(max_length=150, unique=True)
+    desc= models.TextField()
+    def __str__(self) :
+        return self.name
+
+
+
 class Student(models.Model):
     user=models.OneToOneField(NewUser,on_delete=models.CASCADE)
-    name = models.CharField(max_length=150, unique=True)
+    name = models.CharField(max_length=150)
     enr_num=models.CharField(max_length=50,unique=True)
     course=models.ManyToManyField('course.course',blank=True,null=True)
+    program=models.ForeignKey(Programme,on_delete=models.SET_NULL,null=True,blank=True)
     def __str__(self) :
         return self.name
 
 class Faculty(models.Model):
     user=models.OneToOneField(NewUser,on_delete=models.CASCADE)
-    name = models.CharField(max_length=150, unique=True)
+    name = models.CharField(max_length=150)
     def __str__(self) :
         return self.name
-    
+
