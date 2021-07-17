@@ -82,12 +82,14 @@ class studentList(generics.ListCreateAPIView):
     def post(self, request, *args, **kwargs):
         
         user = NewUser.objects.get(email=request.data["email"])
-        prog=Programme.objects.get(name=request.data["program"])
+        prog=Programme.objects.get(id=request.data["program"])
         # course1=course.objects.all()
         # prog=Programme.objects.all()
         
         request.data['user']=user.id
-        request.data['program']=prog.id
+        print('-------------------')
+        print(request.data['program'])
+        # request.data['program']=prog.id
         # request.data['course']=course1
         # request.data['program']=prog
         if(request.user.is_student):

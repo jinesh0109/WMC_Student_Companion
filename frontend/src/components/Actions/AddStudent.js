@@ -11,33 +11,34 @@ const AddStudent=()=>{
         history.push("/home");
 
     }
-    const[progOptions,setProgOptions]=useState({tp:[]});
+    const[progOptions,setProgOptions]=useState();
     const[detail,setDetail]=useState({
         email:'',
         password:'',
         name:'',
         enr_num:'',
-        program:'',
+        program:1,
 
     });
+
+    
+
     //fetching Programmes
     useEffect(() => {
-        const give= async ()=>{
-       await axios.get(`http://127.0.0.1:8000/person/program/`,{
+        
+        axios.get(`http://127.0.0.1:8000/person/program/`,{
         headers: {
             'Authorization': `token ${x}`,
           }
     }).then((res)=>{
-        // res.data.map((obj)=>{
-        //     s
-        // })
+       
         setProgOptions(res.data);
-        // console.log(res.data);
+       
         console.log(progOptions);
     },(error)=>{
         console.log('server error');
-    });}
-    give();
+    });
+    
        
     }, [])
     
@@ -48,6 +49,8 @@ const AddStudent=()=>{
         setDetail((previousVal)=>({...previousVal,[event.target.name]:event.target.value})
             
         )
+        
+        
     };
     
     
@@ -110,23 +113,35 @@ const AddStudent=()=>{
             <input type='text' name='enr_num' label='enr_num' onChange={changeDetail} value={detail.enr_num} ></input>
             <br/><br/> 
 
-{/* <option value={choice.id} key={choice.id}>{choice.name}</option> */}
-            {/* <select >
+<span>Programme:  </span>
+{progOptions &&       
+            <select label='program' name='program' onChange={changeDetail} value={detail.program.id}   >
                 {
-                    progOptions.map((choice)=>{
+                    
+                    
+                     progOptions.map((choice)=>{
                         
-                        <h1>Hey</h1>
+                        return <option key={choice.id} value={choice.id} >{choice.name}</option>
+                        
+                        
                     })
+                    
                 }
-                
-            </select> */}
-                <h1>{progOptions.id}</h1>
-            <label htmlFor="program">Program: </label>
-            <input type='text' name='program' label='program' onChange={changeDetail} value={detail.program} ></input>
+               
+               
+            </select>
+            
+    } <br/>
+
+
+
+
+          
             <br/><br/> 
             
             <button onClick={handleClick}>Cancel</button>
             <button onClick={send}>Submit</button>
+            
         </>
     );
 };
