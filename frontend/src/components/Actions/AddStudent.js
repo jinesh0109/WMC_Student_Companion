@@ -11,7 +11,7 @@ const AddStudent=()=>{
         history.push("/home");
 
     }
-    const[progOptions,setProgOptions]=useState();
+    const[progOptions,setProgOptions]=useState([]);
     const[detail,setDetail]=useState({
         email:'',
         password:'',
@@ -34,7 +34,7 @@ const AddStudent=()=>{
        
         setProgOptions(res.data);
        
-        console.log(progOptions);
+        
     },(error)=>{
         console.log('server error');
     });
@@ -113,20 +113,20 @@ const AddStudent=()=>{
             <input type='text' name='enr_num' label='enr_num' onChange={changeDetail} value={detail.enr_num} ></input>
             <br/><br/> 
 
-<span>Programme:  </span>
-{progOptions &&       
-            <select label='program' name='program' onChange={changeDetail} value={detail.program.id}   >
-                {
-                    
-                    
-                     progOptions.map((choice)=>{
-                        
-                        return <option key={choice.id} value={choice.id} >{choice.name}</option>
+            <span>Programme:  </span>
+            {progOptions &&       
+                <select label='program' name='program' onChange={changeDetail} value={detail.program.id}   >
+                    {
                         
                         
-                    })
-                    
-                }
+                        progOptions.map((choice)=>{
+                            
+                            return <option key={choice.id} value={choice.id} >{choice.name}</option>
+                            
+                            
+                        })
+                        
+                    }
                
                
             </select>

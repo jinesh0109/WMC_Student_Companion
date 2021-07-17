@@ -59,9 +59,13 @@ class showStudent(generics.RetrieveUpdateDestroyAPIView):
         return self.retrieve(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
+        if(request.user.is_student):
+            return HttpResponse('Unauthorized', status=401)
         return self.update(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
+        if(request.user.is_student):
+            return HttpResponse('Unauthorized', status=401)
         return self.destroy(request, *args, **kwargs)
 
 
@@ -82,16 +86,12 @@ class studentList(generics.ListCreateAPIView):
     def post(self, request, *args, **kwargs):
         
         user = NewUser.objects.get(email=request.data["email"])
-        prog=Programme.objects.get(id=request.data["program"])
-        # course1=course.objects.all()
-        # prog=Programme.objects.all()
+        # prog=Programme.objects.get(id=request.data["program"])
+        
         
         request.data['user']=user.id
-        print('-------------------')
-        print(request.data['program'])
-        # request.data['program']=prog.id
-        # request.data['course']=course1
-        # request.data['program']=prog
+        
+        
         if(request.user.is_student):
             return HttpResponse('Unauthorized', status=401)
         return self.create(request, *args, **kwargs)
@@ -112,6 +112,8 @@ class getUserDetailFromAuth(ObtainAuthToken):
 
 
 class programmeListCreateClass(generics.ListCreateAPIView):
+    authentication_classes=[TokenAuthentication,]
+    permission_classes=[IsAuthenticated,]
     serializer_class=programeSerializer
     queryset=Programme.objects.all()
     def get(self, request, *args, **kwargs):
