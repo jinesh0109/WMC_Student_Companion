@@ -35,6 +35,7 @@ const Login=()=>{
                     localStorage.setItem('email',response.data.email);
                     localStorage.setItem('is_student',response.data.is_student);
                     window.location.replace('/home');
+                    
                 }
                 else{
                     alert('Invalid credentials');    

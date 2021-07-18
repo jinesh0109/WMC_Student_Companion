@@ -1,13 +1,13 @@
 import React from 'react';
 import {BrowserRouter,Route,Switch,NavLink} from "react-router-dom";
-
-const AdminDashboard=()=>{
+import StudentNav from '../navbar/Student';
+const StudentDashboard=()=>{
     return( 
     <>
+        <StudentNav/>
         
-        <h1>Hello Student!!</h1>
     </>
     );
 };
 
-export default AdminDashboard;
+export default StudentDashboard;
