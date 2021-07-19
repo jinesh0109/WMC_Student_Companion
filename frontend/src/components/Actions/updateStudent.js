@@ -1,8 +1,16 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import Axios from 'axios';
+
+//material ui
+import CreateIcon from '@material-ui/icons/Create';
+
+import CancelIcon from '@material-ui/icons/Cancel';
 
 function UpdateStudent1(props) {
+    const[bol,setBol]=useState(0);
     const {name,enr_num,id}=props.props;
+    
     const[detail,setDetail]=useState({name:name,enr_num:enr_num,id:id});
     const onDetailChange=(e)=>{
         setDetail((prevVal)=>({...prevVal,[e.target.name]:e.target.value}))
@@ -26,6 +34,9 @@ function UpdateStudent1(props) {
     
     return(
         <>
+             {bol!=id && <button onClick={()=>setBol(id)}> <CreateIcon/> </button>    }  
+             {bol===id &&(
+                   <>    
             <label htmlFor="name" >Name:</label>
             <input name="name" type="text" value={detail.name} onChange={onDetailChange}></input>
             <br/>
@@ -35,6 +46,8 @@ function UpdateStudent1(props) {
 
             <button onClick={post} >Update</button> 
             <br/>
+            <button onClick={()=>{setBol(0)}} ><CancelIcon/> </button> </> 
+            )}
         </>
     );
 }

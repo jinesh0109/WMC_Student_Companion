@@ -7,17 +7,9 @@ import CreateIcon from '@material-ui/icons/Create';
 import CancelIcon from '@material-ui/icons/Cancel';
 
 
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-
-
 //components
-import RetrieveStudent from '../../Actions/RetrieveStudent';
-import UpdateStudent1 from '../../Actions/updateStudent';
+
+import UpdateStudent from '../../Actions/updateStudent';
 import DeleteStudent from '../../Actions/DeleteStudent';
 
 
@@ -27,7 +19,7 @@ const   Admin_Student=()=>{
     const [listItems,setlistItems]=useState([]);
     const tok=localStorage.getItem('token');
     const[bol,setBol]=useState(0);
-    // Post request for updating student
+    
     
 
    
@@ -64,8 +56,7 @@ const   Admin_Student=()=>{
             <ul>{  listItems.map((student)=>{
                 return (<>
                         <li  key={student.id}> {student.name+", "+student.enr_num+", "+student.course}</li>
-                        {bol===student.id &&(<> <UpdateStudent1 props={student} /> <button onClick={()=>{setBol(0)}} ><CancelIcon/> </button> </> )}
-                        {bol!=student.id && <button onClick={()=>setBol(student.id)}> <CreateIcon/> </button>    }  
+                       <UpdateStudent props={student}/>
                          <DeleteStudent props={student}/>
                         
 
