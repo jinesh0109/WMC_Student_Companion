@@ -38,14 +38,10 @@ class particular_student(generics.ListAPIView):
     authentication_classes=[TokenAuthentication,]
     permission_classes=[IsAuthenticated,]
     serializer_class=studentSerializer
-    # def get_queryset(self):
-    #     return self.queryset.annotate(
-    #         course_name='name'
-    #     )
+    
     def get_queryset(self):
-        print('(-------)')    
         print(self.request.user.id)
-        return Student.objects.filter(user=self.request.user)
+        return (Student.objects.filter(user=self.request.user))
    
 class showStudent(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes=[TokenAuthentication,]

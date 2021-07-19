@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,11 +16,12 @@ import '../../App.css';
 
 
 //components
-import StudentProfile from '../dashboard/details/StudentProfil2';
-
+import StudentProfile from '../dashboard/details/StudentProfile2';
+import StudentTakenCourses from '../dashboard/details/StudentTakenCourses';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+  
 
   return (
     <div
@@ -66,6 +68,41 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar() {
   const is_student=localStorage.getItem('is_student');
   console.log(is_student);
+
+  //fetching data of present student
+
+  const x=localStorage.getItem('token');
+  const[details,setDetails]=useState({
+    user:'',
+    name:'',
+    enr_num:'',
+    course:[],
+    program:'',
+    
+});
+
+  useEffect(()=>{
+      axios.get(`http://127.0.0.1:8000/person/student/profile/`,{
+          headers: {
+              'Authorization': `token ${x}`,
+            }
+      }).then((res)=>{
+          console.log(res.data[0]);
+          console.log(res);
+          if(res.data){
+              setDetails(res.data[0]);
+          }
+      },(error)=>{
+          console.log(error.response);
+          console.log(error.request);
+          console.log(error.message);
+
+      })
+  },[]);
+  // //////////////////////////////////
+
+
+
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -115,12 +152,13 @@ export default function Navbar() {
         
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <br/><br/><br/><br/>
+        <StudentTakenCourses props={details}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
       <br/><br/><br/>
 
-        <StudentProfile/>
+        <StudentProfile props={details}/>
       </TabPanel>
       <TabPanel value={value} index={3}>
         <Logout />

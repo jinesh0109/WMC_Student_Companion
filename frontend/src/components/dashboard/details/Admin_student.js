@@ -33,7 +33,7 @@ const   Admin_Student=()=>{
           }).then((res)=>{
             // setStudentList(res.data);
             const students=res.data;
-            
+            console.log(res.data);
            setlistItems( students);
   
            
