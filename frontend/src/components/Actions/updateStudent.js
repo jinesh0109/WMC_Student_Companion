@@ -33,7 +33,7 @@ function UpdateStudent1(props) {
             <input name="enr_num" value={detail.enr_num} onChange={onDetailChange} type="text" ></input>
             
 
-            <button onClick={post} >Update</button>
+            <button onClick={post} >Update</button> 
             <br/>
         </>
     );
