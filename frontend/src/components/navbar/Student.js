@@ -91,6 +91,7 @@ export default function Navbar() {
           console.log(res);
           if(res.data){
               setDetails(res.data[0]);
+              // setDetails((prevVal)=>({...prevVal,[prevVal.course]:res.data[0].course}))
           }
       },(error)=>{
           console.log(error.response);

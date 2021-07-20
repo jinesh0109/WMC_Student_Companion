@@ -2,7 +2,7 @@ from django.db.models import fields
 from rest_framework import serializers
 from .models import NewUser, Programme,Student
 from rest_framework.authtoken.models import Token
-
+from course.serializers import CourseSerializer
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -16,16 +16,17 @@ class UserSerializer(serializers.ModelSerializer):
         User.save()
         Token.objects.create(user=User)
         return User
-class studentSerializer(serializers.ModelSerializer):
-    course= serializers.StringRelatedField(many=True,read_only=True)
-    program= serializers.StringRelatedField(read_only=True)
-    # user= serializers.StringRelatedField(read_only=True)
-    class Meta:
-        model=Student
-        fields = '__all__'
-
 
 class programeSerializer(serializers.ModelSerializer):
     class Meta:
         model=Programme
         fields='__all__'
+class studentSerializer(serializers.ModelSerializer):
+    course=CourseSerializer(many=True,read_only=True)
+    program= serializers.StringRelatedField(read_only=True)
+    # program= programeSerializer(read_only=True)
+    # user= serializers.StringRelatedField(read_only=True)
+    class Meta:
+        model=Student
+        fields = '__all__'
+

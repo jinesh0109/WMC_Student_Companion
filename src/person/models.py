@@ -67,7 +67,7 @@ class Student(models.Model):
     user=models.OneToOneField(NewUser,on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
     enr_num=models.CharField(max_length=50,unique=True)
-    course=models.ManyToManyField('course.course',blank=True,null=True)
+    course=models.ManyToManyField('course.course',blank=True,null=True,related_name='courseStudentBridge')
     program=models.ForeignKey(Programme,on_delete=models.SET_NULL,null=True,blank=True)
     def __str__(self) :
         return self.name

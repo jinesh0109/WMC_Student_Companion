@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
+import Axios from 'axios';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -84,6 +85,62 @@ export default function Navbar() {
     localStorage.setItem('is_student','');
     window.location.replace('/');
   }
+
+
+
+
+
+///course-jinesh
+  
+const[listCourses,setListCourses]=useState([])
+const tok=localStorage.getItem('token');
+useEffect(()=>{
+    Axios.get('http://127.0.0.1:8000/course/course_list/',
+    {
+        headers: {
+        'Authorization': `token ${tok}`,
+        }
+    }
+    ).then((res)=>{
+        const courses=res.data;
+        console.log(courses);
+      
+        setListCourses(courses);
+        
+    });
+},[]);
+
+//Student-Poojan
+
+const [listItems,setlistItems]=useState([]);
+  
+  
+  useEffect(() => {
+      Axios.get(`http://127.0.0.1:8000/person/students/`,{
+          headers: {
+          'Authorization': `token ${tok}`,
+          }
+
+        }).then((res)=>{
+          // setStudentList(res.data);
+          const students=res.data;
+          console.log(students);
+         setlistItems( students);
+
+         
+        });
+          // console.log(res.data);
+      }
+      
+     
+  , []);
+
+
+
+
+
+
+
   return (
     <div className={classes.root}  >
       <AppBar position="static" style={{ position: "fixed",top: 0    }}>
@@ -113,7 +170,7 @@ export default function Navbar() {
         {/* { (is_student=='true')?  <></>:<Admin_Student/>  } */}
         
           
-        <Admin_Student/>
+        <Admin_Student props={listItems}/>
         
         
       </TabPanel>
