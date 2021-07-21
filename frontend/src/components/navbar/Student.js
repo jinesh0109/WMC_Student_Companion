@@ -18,7 +18,8 @@ import '../../App.css';
 //components
 import StudentProfile from '../dashboard/details/StudentProfile2';
 import StudentTakenCourses from '../dashboard/details/StudentTakenCourses';
-
+import Todo from '../ToDo/Todo';
+import { red } from '@material-ui/core/colors';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   
@@ -57,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: red[500],
     
 
     justifyContent:"space-between",
@@ -145,8 +146,8 @@ export default function Navbar() {
         </Tabs>
       </AppBar>
       <TabPanel  style={{marginTop:'15%'}}  value={value} index={0}>
-        
-        
+      
+        <Todo/>
           
         
         

@@ -8,15 +8,20 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication,SessionAuthentication
 from rest_framework.permissions import IsAuthenticated,AllowAny
-from .models import NewUser, Programme,Student
-from .serializers import UserSerializer, programeSerializer,studentSerializer
+
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework import viewsets
-from course.models import course
 
-# generics.CreateAPIView,ListView,generics.RetrieveAPIView,generics.RetrieveDestroyAPIView
+# Models
+from course.models import course
+from .models import NewUser, Programme,Student,TodoData
+
+
+#Serializers 
+from .serializers import UserSerializer, programeSerializer,studentSerializer,TodoSerializer
+
 
 #to create a user
 class CreateUserAPIView(generics.CreateAPIView):
@@ -121,3 +126,17 @@ class programmeListCreateClass(generics.ListCreateAPIView):
         if(request.user.is_student):
             return HttpResponse('Unauthorized', status=401)
         return self.create(request, *args, **kwargs)
+
+
+#---TO DO---
+class ToDoCreateList(generics.ListCreateAPIView):
+    authentication_classes=[TokenAuthentication,]
+    permission_classes=[IsAuthenticated,]
+    serializer_class=TodoSerializer
+    queryset=TodoData.objects.all()
+
+class ToDoRetUpdDest(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes=[TokenAuthentication,]
+    permission_classes=[IsAuthenticated,]
+    serializer_class=TodoSerializer
+    queryset=TodoData.objects.all()

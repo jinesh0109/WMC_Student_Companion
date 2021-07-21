@@ -3,7 +3,8 @@ from django.db.models.query import ModelIterable
 from django.utils import timezone
 # from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-# from course.models import course
+from datetime import datetime
+
 
 class CustomAccountManager(BaseUserManager):
 
@@ -78,3 +79,10 @@ class Faculty(models.Model):
     def __str__(self) :
         return self.name
 
+class TodoData(models.Model):
+    student=models.ForeignKey(Student,on_delete=models.CASCADE)
+    title=models.CharField(max_length=300)
+    desc=models.TextField()
+    created=models.DateTimeField(auto_now_add=True )
+    due_date = models.DateTimeField(default=datetime.now())
+    complete = models.BooleanField(default=False)

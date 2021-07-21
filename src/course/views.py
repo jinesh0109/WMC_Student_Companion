@@ -11,6 +11,7 @@ from rest_framework.authtoken.models import Token
 from django.http import HttpResponse
 from rest_framework.permissions import IsAuthenticated
 from django.views.decorators.csrf import csrf_exempt
+from person.models import Student;
 
 
 
@@ -65,6 +66,19 @@ class CourseRUD(RetrieveUpdateDestroyAPIView):
         return self.retrieve(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
+        
+        # course.objects.create()
+        student_obj=[]
+        for i in request.data['arr']:
+            if(request.data['arr'][i]==True):
+                stud=Student.objects.get(id=i)
+                cor=course.objects.get(id=request.data['id'])
+                cor.courseStudentBridge.add(stud)
+        
+        # request.data['courseStudentBridge']=student_obj
+        # # course.objects.get(id=request.data['id']).courseStudentBridge.create()
+        # .Student.add(course.objects.get(id=1))
+
         print(request.data)
         # if(request.user.is_student):
         #     return HttpResponse('Unauthorized', status=401)
