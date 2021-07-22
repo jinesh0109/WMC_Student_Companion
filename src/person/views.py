@@ -130,13 +130,23 @@ class programmeListCreateClass(generics.ListCreateAPIView):
 
 #---TO DO---
 class ToDoCreateList(generics.ListCreateAPIView):
+    
     authentication_classes=[TokenAuthentication,]
     permission_classes=[IsAuthenticated,]
     serializer_class=TodoSerializer
     queryset=TodoData.objects.all()
+    def post(self, request, *args, **kwargs):
+        
+        request.data['student']=Student.objects.get(user=NewUser.objects.get(email= request.user)).id
+        print(request.data)
+        return self.create(request, *args, **kwargs)
 
 class ToDoRetUpdDest(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes=[TokenAuthentication,]
-    permission_classes=[IsAuthenticated,]
+    # permission_classes=[IsAuthenticated,]
     serializer_class=TodoSerializer
     queryset=TodoData.objects.all()
+    def put(self, request, *args, **kwargs):
+        request.data['student']=Student.objects.get(user=NewUser.objects.get(email= request.user)).id
+        print(request.data)
+        return self.update(request, *args, **kwargs)

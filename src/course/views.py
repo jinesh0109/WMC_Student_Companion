@@ -1,5 +1,6 @@
 import builtins
 from django.shortcuts import render
+from rest_framework import generics
 from .serializers import BuildingSerializer, CategorySerializer, CourseSerializer, FacultySerializer
 from rest_framework.generics import ListAPIView, ListCreateAPIView,RetrieveUpdateDestroyAPIView
 from .models import course,category,Building
@@ -118,6 +119,11 @@ class FacultyList(ListCreateAPIView):
         # if(request.user.is_student):
         #     return HttpResponse('Unauthorized', status=401)
         return self.create(request, *args, **kwargs)
+class FacultyRetieve(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes=[TokenAuthentication,]
+    permission_classes=[IsAuthenticated,]
+    queryset=Faculty.objects.all()
+    serializer_class=FacultySerializer
 
 class BuildingList(ListCreateAPIView):
     authentication_classes=[TokenAuthentication,]

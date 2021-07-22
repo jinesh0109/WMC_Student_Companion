@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import CreateUserAPIView,studentList,particular_student,getUserDetailFromAuth,showStudent
-from .views import programmeListCreateClass
+from .views import programmeListCreateClass,ToDoCreateList,ToDoRetUpdDest
 from django.conf.urls.static import static
 from django.conf import settings
 # from django.views.decorators.csrf import ensure_csrf_cookie
@@ -17,5 +17,9 @@ urlpatterns = [
     path('student/<int:pk>/',showStudent.as_view()),
     path('student/profile/',particular_student.as_view()),
     path('program/',programmeListCreateClass.as_view()),
+
+    path('todo/',ToDoCreateList.as_view()),
+    path('todo/<int:pk>/',ToDoRetUpdDest.as_view()),
+    
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

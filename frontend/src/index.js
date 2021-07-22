@@ -4,6 +4,9 @@ import './index.css';
 import App2 from './App2';
 import reportWebVitals from './reportWebVitals';
 
+//bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 

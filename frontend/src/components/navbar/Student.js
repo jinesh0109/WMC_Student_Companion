@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    backgroundColor: red[500],
+    // backgroundColor: red[500],
     
 
     justifyContent:"space-between",

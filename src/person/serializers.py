@@ -31,6 +31,8 @@ class studentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class TodoSerializer(serializers.ModelSerializer):
+    # due_date = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S")
+
     class Meta:
         model=TodoData
         fields = '__all__'
