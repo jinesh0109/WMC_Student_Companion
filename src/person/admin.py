@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import NewUser,Faculty, Programme,Student,TodoData
+from .models import NewUser,Faculty, Programme,Student,TodoData,CourseStudent
 # Register your models here.
 @admin.register(NewUser)
 class AdminShow(admin.ModelAdmin):
@@ -12,7 +12,7 @@ admin.site.register(Faculty)
 admin.site.register(Student)
 admin.site.register(Programme)
 
-
+admin.site.register(CourseStudent)
    
 @admin.register(TodoData)
 class todoAdmin(admin.ModelAdmin):

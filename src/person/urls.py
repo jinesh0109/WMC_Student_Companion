@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import CreateUserAPIView,studentList,particular_student,getUserDetailFromAuth,showStudent
+from .views import CreateUserAPIView, completedCourse,studentList,particular_student,getUserDetailFromAuth,showStudent
 from .views import programmeListCreateClass,ToDoCreateList,ToDoRetUpdDest
 from django.conf.urls.static import static
 from django.conf import settings
@@ -21,5 +21,6 @@ urlpatterns = [
     path('todo/',ToDoCreateList.as_view()),
     path('todo/<int:pk>/',ToDoRetUpdDest.as_view()),
     
+    path('completedcourse/',completedCourse.as_view())
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

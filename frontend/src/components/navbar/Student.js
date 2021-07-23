@@ -20,6 +20,7 @@ import StudentProfile from '../dashboard/details/StudentProfile2';
 import StudentTakenCourses from '../dashboard/details/StudentTakenCourses';
 import Todo from '../ToDo/Todo';
 import { red } from '@material-ui/core/colors';
+import CompletedCourses from '../dashboard/details/CompletedCourses';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   
@@ -81,7 +82,7 @@ export default function Navbar() {
     program:'',
     
 });
-
+ const [completedCourse,setCompletedCourse]=useState();
   useEffect(()=>{
       axios.get(`http://127.0.0.1:8000/person/student/profile/`,{
           headers: {
@@ -101,6 +102,24 @@ export default function Navbar() {
 
       })
   },[]);
+
+  useEffect(()=>{
+    axios.get(`http://127.0.0.1:8000/person/completedcourse/`,{
+        headers: {
+            'Authorization': `token ${x}`,
+          }
+    }).then((res)=>{
+        if(res.data){
+          setCompletedCourse(res.data);
+            // setDetails((prevVal)=>({...prevVal,[prevVal.course]:res.data[0].course}))
+        }
+    },(error)=>{
+        console.log(error.response);
+        console.log(error.request);
+        console.log(error.message);
+
+    })
+},[]);
   // //////////////////////////////////
 
 
@@ -137,8 +156,10 @@ export default function Navbar() {
           <Tab   style={sytleTp} label="Todo List" icon={<PhoneIcon /> } aria-label="phone" {...a11yProps(0)} />
         
           <Tab style={sytleTp} label="Course" icon={<FavoriteIcon />} aria-label="favorite" {...a11yProps(1)} />
-          <Tab style={sytleTp} label="Profile" icon={<PersonPinIcon />} aria-label="person" {...a11yProps(2)} />
-          <Tab style={{}} label="Logout" icon={<HelpIcon />} aria-label="help" {...a11yProps(3)} />
+          <Tab style={sytleTp} label="Completed Courses" icon={<FavoriteIcon />} aria-label="favorite" {...a11yProps(2)} />
+          <Tab style={sytleTp} label="Profile" icon={<PersonPinIcon />} aria-label="person" {...a11yProps(3)} />
+          
+          <Tab style={{}} label="Logout" icon={<HelpIcon />} aria-label="help" {...a11yProps(4)} />
           
           {/* <Tab icon={<ShoppingBasket />} aria-label="shopping" {...a11yProps(4)} />
           <Tab icon={<ThumbDown />} aria-label="up" {...a11yProps(5)} />
@@ -158,11 +179,15 @@ export default function Navbar() {
         <StudentTakenCourses props={details}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
+        <br/><br/><br/><br/>
+        <CompletedCourses props={completedCourse}/>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
       <br/><br/><br/>
 
         <StudentProfile props={details}/>
       </TabPanel>
-      <TabPanel value={value} index={3}>
+      <TabPanel value={value} index={4}>
         <Logout />
       </TabPanel>
      

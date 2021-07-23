@@ -20,12 +20,13 @@ from django.core.mail import send_mail
 
 
 # Models
-from course.models import course
-from .models import NewUser, Programme,Student,TodoData
+from course.models import Building, category, course
+from course.serializers import BuildingSerializer, CategorySerializer, CourseSerializer, FacultySerializer
+from .models import CourseStudent, Faculty, NewUser, Programme,Student,TodoData
 
 
 #Serializers 
-from .serializers import UserSerializer, programeSerializer,studentSerializer,TodoSerializer
+from .serializers import UserSerializer, programeSerializer,studentSerializer,TodoSerializer,courseStudentSerializer
 
 
 #to create a user
@@ -50,8 +51,20 @@ class particular_student(generics.ListAPIView):
     serializer_class=studentSerializer
     
     def get_queryset(self):
-        print(self.request.user.id)
         return (Student.objects.filter(user=self.request.user))
+        
+    def get(self, request, *args, **kwargs):
+        stud_obj=Student.objects.filter(user=self.request.user)
+        stud_data=studentSerializer(stud_obj,many=True).data
+        course_obj=[]
+        for i in range(len(stud_data[0]['course'])):
+            stud_data[0]['course'][i]['faculty']=FacultySerializer( Faculty.objects.get(id=stud_data[0]['course'][i]['faculty'])).data
+            stud_data[0]['course'][i]['building']=BuildingSerializer( Building.objects.get(id=stud_data[0]['course'][i]['building'])).data
+            cat=[]
+            for j in range(len(stud_data[0]['course'][i]['cat'])):
+                cat.append(CategorySerializer( category.objects.get(id=stud_data[0]['course'][i]['cat'][j])).data)
+            stud_data[0]['course'][i]['cat']=cat
+        return Response(stud_data)
    
 class showStudent(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes=[TokenAuthentication,]
@@ -96,7 +109,7 @@ class studentList(generics.ListCreateAPIView):
         
         
         request.data['user']=user.id
-        
+         
         
         if(request.user.is_student):
             return HttpResponse('Unauthorized', status=401)
@@ -158,3 +171,35 @@ class ToDoRetUpdDest(generics.RetrieveUpdateDestroyAPIView):
         request.data['student']=Student.objects.get(user=NewUser.objects.get(email= request.user)).id
         print(request.data)
         return self.update(request, *args, **kwargs)
+
+
+class completedCourse(generics.ListCreateAPIView):
+    authentication_classes=[TokenAuthentication,]
+    permission_classes=[IsAuthenticated,]
+    serializer_class=courseStudentSerializer
+    queryset=TodoData.objects.all()
+    def get(self, request, *args, **kwargs):
+        user=request.user
+        
+        student_obj=Student.objects.get(user=NewUser.objects.get(email=user).id)
+        completedCourseStudent=CourseStudent.objects.filter(student=student_obj,completed=True)
+        course_obj=[]
+        print(completedCourseStudent)
+        
+        for i in range(len(completedCourseStudent)):
+            dicMain={'course':''}
+            dic={'course':''}
+            courseSingleObj=completedCourseStudent[i].course
+            tp=CourseSerializer(courseSingleObj).data
+            dic=tp
+            dic['faculty']=FacultySerializer( Faculty.objects.get(id=tp['faculty'])).data
+            dic['building']=BuildingSerializer( Building.objects.get(id=tp['building'])).data
+            # dicMain['course']=dic
+            course_obj.append(dic)
+            
+        dicMain={'course':course_obj}
+        return Response(dicMain)
+        
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)

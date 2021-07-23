@@ -17,7 +17,8 @@ import FeedbackIcon from '@material-ui/icons/Feedback';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { Hidden } from '@material-ui/core';
+import Button from 'react-bootstrap/Button';
+
 // https://material-ui.com/components/cards/
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RecipeReviewCard(props) {
-  
+  console.log(props);
    const details=props.props.course;
    console.log(details);
    
@@ -88,8 +89,11 @@ export default function RecipeReviewCard(props) {
   };
 
   return (
+    <>
+    
     <div  className={classes.root}>
     
+  
     {details.map((course)=>{
       return(
       <div key={course.id}>
@@ -131,5 +135,6 @@ export default function RecipeReviewCard(props) {
     })
     }
     </div>
+    </>
   );
 }

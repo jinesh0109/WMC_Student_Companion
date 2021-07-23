@@ -1,6 +1,6 @@
 from django.db.models import fields
 from rest_framework import serializers
-from .models import NewUser, Programme,Student,TodoData
+from .models import Faculty, NewUser, Programme,Student,TodoData,CourseStudent
 from rest_framework.authtoken.models import Token
 from course.serializers import CourseSerializer
 
@@ -35,4 +35,9 @@ class TodoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=TodoData
+        fields = '__all__'
+
+class courseStudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=CourseStudent
         fields = '__all__'
