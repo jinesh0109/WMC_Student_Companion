@@ -135,6 +135,8 @@ class ToDoCreateList(generics.ListCreateAPIView):
     permission_classes=[IsAuthenticated,]
     serializer_class=TodoSerializer
     queryset=TodoData.objects.all()
+
+    
     def post(self, request, *args, **kwargs):
         
         request.data['student']=Student.objects.get(user=NewUser.objects.get(email= request.user)).id

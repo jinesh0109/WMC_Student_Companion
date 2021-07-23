@@ -4,10 +4,10 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
 // components 
-import CompletedTask from '../Actions/CompletedTask';
-import PendingTask from '../Actions/PendingTask';
+import CompletedTask from './CompletedTask';
+import PendingTask from './PendingTask';
 import CreateTask from '../Actions/CreateTask';
-import AllTask from '../Actions/AllTask';
+import ShowTask from './ShowTask';
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -31,6 +31,8 @@ export default function ContainedButtons() {
             }
       }).then((res)=>{
           settaskList(res.data);
+          console.log(res,'----------------');
+
           
       },(error)=>{
           console.log(error.response);
@@ -55,10 +57,10 @@ export default function ContainedButtons() {
       Completed Task
       </Button>
       <br/>
-      {showPage==0&&<AllTask props={taskList}/>}
+      {showPage==0&&<ShowTask props={taskList}/>}
       {showPage==1&&<CreateTask/>}
-      {showPage==2&&<PendingTask/>}
-      {showPage==3&&<CompletedTask/>}
+      {showPage==2&&<PendingTask props={taskList}/>}
+      {showPage==3&&<CompletedTask props={taskList}/>}
     </div>
   );
 }

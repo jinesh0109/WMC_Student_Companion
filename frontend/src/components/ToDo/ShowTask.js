@@ -7,8 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 //components
-import DeleteTask from './DeleteTask';
-import CompleteTask from './CompleteTask';
+import DeleteTask from '../Actions/DeleteTask';
+import CompleteTask from '../Actions/CompleteTask';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,7 +40,12 @@ const AllTask=(props)=>{
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  
+
+  //converting date to readable...
+  const dateFormatter=(date)=>{
+    console.log(date.slice(0,9)+date.slice(11,19));
+    return date.slice(0,10)+' Time:'+date.slice(11,19);
+  }
   return (
     <div className={classes.root}>
       
@@ -55,10 +60,11 @@ const AllTask=(props)=>{
                     >
                     
                         <Typography className={classes.heading}>{task.title}</Typography>
-                        <Typography className={classes.secondaryHeading}>
-                            {'Due: '+task.due_date}
-                        </Typography>
-                        
+                        {task && task.due_date&&
+                          <Typography className={classes.secondaryHeading}>
+                              {'Due: '+dateFormatter(task.due_date)}
+                          </Typography>
+                        }
                        <DeleteTask props={task}/>
                        <CompleteTask props={task}/>
 

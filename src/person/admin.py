@@ -11,4 +11,9 @@ class AdminShow(admin.ModelAdmin):
 admin.site.register(Faculty)
 admin.site.register(Student)
 admin.site.register(Programme)
-admin.site.register(TodoData)
+
+
+   
+@admin.register(TodoData)
+class todoAdmin(admin.ModelAdmin):
+    list_display=('title','due_date','complete')

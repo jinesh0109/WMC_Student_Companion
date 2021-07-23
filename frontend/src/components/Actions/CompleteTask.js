@@ -20,7 +20,7 @@ const CompleteTask=(props)=>{
     const [CompleteAlertId, setCompleteAlertId] = React.useState(0);
     console.log(new Date(task.due_date).toISOString())
 
-   task['complete']=true
+   
    
     const handleClose = () => {
         setOpen(false);
@@ -30,7 +30,7 @@ const CompleteTask=(props)=>{
 
     const CompleteTask=()=>{
         Axios.put(`http://127.0.0.1:8000/person/todo/${task.id}/`,
-        {title:task.title,desc:task.desc,due_date:task.due_date,complete:task.complete}
+        {title:task.title,desc:task.desc,due_date:task.due_date,complete:true}
         ,{
             headers: {
             'Authorization': `token ${tok}`,
@@ -54,6 +54,7 @@ const CompleteTask=(props)=>{
                         
                             startIcon={<DoneOutlineIcon />}
                             onClick={()=>{setOpen(true);setCompleteAlertId(task.id)}}
+                            disabled={task.complete}
                         >
                             Complete
                         </Button>
@@ -66,7 +67,7 @@ const CompleteTask=(props)=>{
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
-            <DialogTitle id="alert-dialog-title">{"Are you sure you want to Complete?"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Are you sure you Completed it?"}</DialogTitle>
             <DialogContent>
             <DialogContentText id="alert-dialog-description">
                 Task Title: {task.title}

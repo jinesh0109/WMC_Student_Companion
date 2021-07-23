@@ -49,8 +49,8 @@ const CreateTask=()=>{
             <br/><br/><br/>
 
             
-            <textarea  name="desc" label='desc' onChange={change} value={taskData.desc}  rows="5" cols="50">
-                Description
+            <textarea placeholder="Description" name="desc" label='desc' onChange={change} value={taskData.desc}  rows="5" cols="50">
+                
             </textarea>
             <br/><br/><br/>
 
