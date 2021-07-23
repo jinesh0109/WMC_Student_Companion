@@ -157,3 +157,21 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ALLOW_ALL_ORIGINS=True
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+
+
+
+# EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST="smtp.gmail.com"
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = "temporary1209tp@gmail.com"
+# DEFAULT_FROM_EMAIL = "temporary1209tp@gmail.com"
+# EMAIL_HOST_PASSWORD="temporary@11223344"
+
+EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = "temporary1209tp@gmail.com"
+EMAIL_HOST_PASSWORD="temporary@11223344"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_PORT = 465

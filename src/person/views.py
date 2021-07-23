@@ -14,6 +14,11 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework import viewsets
 
+from django.db.models import DateTimeField
+from django.db.models.functions import Trunc
+from django.core.mail import send_mail
+
+
 # Models
 from course.models import course
 from .models import NewUser, Programme,Student,TodoData
@@ -134,18 +139,19 @@ class ToDoCreateList(generics.ListCreateAPIView):
     authentication_classes=[TokenAuthentication,]
     permission_classes=[IsAuthenticated,]
     serializer_class=TodoSerializer
-    queryset=TodoData.objects.all()
-
+    queryset=TodoData.objects.all().order_by('due_date')
+    
     
     def post(self, request, *args, **kwargs):
         
+        send_mail('New Task','Ok it is sent','temporary1209tp@gmail.com',[request.user])
         request.data['student']=Student.objects.get(user=NewUser.objects.get(email= request.user)).id
         print(request.data)
         return self.create(request, *args, **kwargs)
 
 class ToDoRetUpdDest(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes=[TokenAuthentication,]
-    # permission_classes=[IsAuthenticated,]
+    permission_classes=[IsAuthenticated,]
     serializer_class=TodoSerializer
     queryset=TodoData.objects.all()
     def put(self, request, *args, **kwargs):

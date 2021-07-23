@@ -11,6 +11,7 @@ const App2=()=>{
         <>
             
             <BrowserRouter>
+            
                 <Switch>
                     {/* <Route exact path='/' component={Singup} /> */}
                     <Route exact path='/' component={Login} />
