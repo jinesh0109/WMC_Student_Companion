@@ -1,8 +1,9 @@
 from django.db.models import fields
 from rest_framework import serializers
-from .models import Faculty, NewUser, Programme,Student,TodoData,CourseStudent
+from .models import CreditModel, Faculty, NewUser, Programme,Student,TodoData,CourseStudent
 from rest_framework.authtoken.models import Token
 from course.serializers import CourseSerializer
+from rest_framework.response import Response
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -40,4 +41,9 @@ class TodoSerializer(serializers.ModelSerializer):
 class courseStudentSerializer(serializers.ModelSerializer):
     class Meta:
         model=CourseStudent
+        fields = '__all__'
+
+class creditSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=CreditModel
         fields = '__all__'

@@ -5,6 +5,8 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from datetime import datetime
 
+# from course.models import category
+
 
 class CustomAccountManager(BaseUserManager):
 
@@ -97,3 +99,10 @@ class TodoData(models.Model):
     created=models.DateTimeField(auto_now_add=True )
     due_date = models.DateTimeField(default=datetime.now())
     complete = models.BooleanField(default=False)
+
+class CreditModel(models.Model):
+    program=models.ForeignKey(Programme,on_delete=models.CASCADE)
+    cat=models.ForeignKey('course.category',on_delete=models.CASCADE)
+    requiredCredits=models.IntegerField(default=3)
+    class Meta:
+        unique_together = (("program", "cat"),)

@@ -80,14 +80,14 @@ const AddStudent=()=>{
                 window.location.replace('/home');
             
             },(error)=>{
-                alert('Please enter valid and unique Name & Enr_num');
-            //     console.log(error.message);console.log(error.response);
-            // console.log(error.request);
+                // alert('Please enter valid and unique Name & Enr_num');
+                console.log(error.message);console.log(error.response);
+            console.log(error.request);
                 // console.log('Student creation error');
             })
         },(error)=>{
-            // console.log(error.message);console.log(error.response);
-            // console.log(error.request);
+            console.log(error.message);console.log(error.response);
+            console.log(error.request);
             alert('Please enter valid and unique Email & Password');
             // console.log('User creation error.');
         })

@@ -19,6 +19,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from 'react-bootstrap/Button';
 
+//
+import CompleteCourse from '../../Actions/CompleteCourse'
 // https://material-ui.com/components/cards/
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RecipeReviewCard(props) {
   console.log(props);
-   const details=props.props.course;
+   const details=props.props;
    console.log(details);
    
    
@@ -125,7 +127,8 @@ export default function RecipeReviewCard(props) {
         <IconButton aria-label="add to favorites">
           <FeedbackIcon />
         </IconButton>
-       
+
+       <CompleteCourse props={course}/>
         
       
       

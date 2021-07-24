@@ -21,6 +21,9 @@ import StudentTakenCourses from '../dashboard/details/StudentTakenCourses';
 import Todo from '../ToDo/Todo';
 import { red } from '@material-ui/core/colors';
 import CompletedCourses from '../dashboard/details/CompletedCourses';
+import RequiredCredits from '../dashboard/details/RequiredCredits';
+
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   
@@ -82,7 +85,8 @@ export default function Navbar() {
     program:'',
     
 });
- const [completedCourse,setCompletedCourse]=useState();
+const[totalCredits,settotalCredits]=useState();
+//  const [completedCourse,setCompletedCourse]=useState();
   useEffect(()=>{
       axios.get(`http://127.0.0.1:8000/person/student/profile/`,{
           headers: {
@@ -95,31 +99,52 @@ export default function Navbar() {
               setDetails(res.data[0]);
               // setDetails((prevVal)=>({...prevVal,[prevVal.course]:res.data[0].course}))
           }
-      },(error)=>{
+          return res.data[0];
+      } ,(error)=>{
           console.log(error.response);
           console.log(error.request);
           console.log(error.message);
 
       })
   },[]);
-
   useEffect(()=>{
-    axios.get(`http://127.0.0.1:8000/person/completedcourse/`,{
+    axios.get(`http://127.0.0.1:8000/person/credit/`,{
         headers: {
             'Authorization': `token ${x}`,
           }
     }).then((res)=>{
+        console.log(res.data);
+        console.log(res);
         if(res.data){
-          setCompletedCourse(res.data);
+          settotalCredits(res.data);
             // setDetails((prevVal)=>({...prevVal,[prevVal.course]:res.data[0].course}))
         }
-    },(error)=>{
+        return res.data[0];
+    } ,(error)=>{
         console.log(error.response);
         console.log(error.request);
         console.log(error.message);
 
     })
 },[]);
+
+//   useEffect(()=>{
+//     axios.get(`http://127.0.0.1:8000/person/completedcourse/`,{
+//         headers: {
+//             'Authorization': `token ${x}`,
+//           }
+//     }).then((res)=>{
+//         if(res.data){
+//           setCompletedCourse(res.data);
+//             // setDetails((prevVal)=>({...prevVal,[prevVal.course]:res.data[0].course}))
+//         }
+//     },(error)=>{
+//         console.log(error.response);
+//         console.log(error.request);
+//         console.log(error.message);
+
+//     })
+// },[]);
   // //////////////////////////////////
 
 
@@ -157,9 +182,11 @@ export default function Navbar() {
         
           <Tab style={sytleTp} label="Course" icon={<FavoriteIcon />} aria-label="favorite" {...a11yProps(1)} />
           <Tab style={sytleTp} label="Completed Courses" icon={<FavoriteIcon />} aria-label="favorite" {...a11yProps(2)} />
-          <Tab style={sytleTp} label="Profile" icon={<PersonPinIcon />} aria-label="person" {...a11yProps(3)} />
+          <Tab style={sytleTp} label="Required Credits" icon={<PersonPinIcon />} aria-label="person" {...a11yProps(3)} />
+          <Tab style={sytleTp} label="Profile" icon={<PersonPinIcon />} aria-label="person" {...a11yProps(4)} />
           
-          <Tab style={{}} label="Logout" icon={<HelpIcon />} aria-label="help" {...a11yProps(4)} />
+          
+          <Tab style={{}} label="Logout" icon={<HelpIcon />} aria-label="help" {...a11yProps(5)} />
           
           {/* <Tab icon={<ShoppingBasket />} aria-label="shopping" {...a11yProps(4)} />
           <Tab icon={<ThumbDown />} aria-label="up" {...a11yProps(5)} />
@@ -168,7 +195,7 @@ export default function Navbar() {
       </AppBar>
       <TabPanel  style={{marginTop:'15%'}}  value={value} index={0}>
       
-        <Todo/>
+        <Todo props={details.name} userid={details.id}/>
           
         
         
@@ -176,18 +203,23 @@ export default function Navbar() {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <br/><br/><br/><br/>
-        <StudentTakenCourses props={details}/>
+        <StudentTakenCourses props={details.course}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <br/><br/><br/><br/>
-        <CompletedCourses props={completedCourse}/>
+        <CompletedCourses props={details}/>
       </TabPanel>
       <TabPanel value={value} index={3}>
       <br/><br/><br/>
-
-        <StudentProfile props={details}/>
+      <RequiredCredits props={totalCredits}/>
+        
       </TabPanel>
       <TabPanel value={value} index={4}>
+      <br/><br/><br/>
+      <StudentProfile props={details}/>
+        
+      </TabPanel>
+      <TabPanel value={value} index={5}>
         <Logout />
       </TabPanel>
      
