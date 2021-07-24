@@ -86,7 +86,7 @@ class CourseStudent(models.Model):
     course=models.ForeignKey('course.course',on_delete=models.CASCADE)
     student=models.ForeignKey(Student,on_delete=models.CASCADE)
     completed=models.BooleanField(default=False)
-    rating=models.CharField(max_length=300,default='',blank=True,null=True)
+    rating=models.CharField(max_length=300,default=0,blank=True,null=True)
     class Meta:
         unique_together = (("course", "student"),)
     

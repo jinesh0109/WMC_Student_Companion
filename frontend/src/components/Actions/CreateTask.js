@@ -41,41 +41,47 @@ const CreateTask=()=>{
         });
     });
     return (
-        <div>
+        <div style={{background: 'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%'
+        }}>
             
-            
-            <label htmlFor="title">Title:</label>
+            <br/><br/>
+            <label htmlFor="title" style={{fontSize:30}}>Title:</label>
             <input type='text' name='title' label='title' onChange={change} value={taskData.title} ></input>
             <br/><br/><br/>
 
             
-            <textarea placeholder="Description" name="desc" label='desc' onChange={change} value={taskData.desc}  rows="5" cols="50">
+            <textarea placeholder="Description" style={{fontSize:20}} name="desc" label='desc' onChange={change} value={taskData.desc}  rows="5" cols="50">
                 
             </textarea>
             <br/><br/><br/>
 
             <TextField
+                size='medium'
                 label="Due Date:"
                 name="due_date"
                 type="datetime-local"
                 defaultValue="2017-05-24T10:30"
+                
                 InputLabelProps={{
                 shrink: true,
+                "aria-setsize":100
+                
                 }}
                 onChange={change}
                 value={taskData.due_date}
             />
-            <br/><br/><br/>
+            <br/><br/>
 
             <Button
                 variant="contained"
                 color="primary"
-                size="small"
+                size="medium"
                 onClick={sendData}
                 startIcon={<SaveIcon />}>
                 SAVE
                 
             </Button>
+            <br/><br/><br/>
         </div>
     )
 };

@@ -44,9 +44,9 @@ export default function SimpleRating(props) {
     });
 }
   return (
-    <div>
-        <div>
-      <Button aria-label="Rate Course" variant="outlined" color="primary" onClick={handleClickOpen}>
+    <>
+        
+      <Button  style={{color:'black',}} aria-label="Rate Course" variant="outlined" color="primary" onClick={handleClickOpen}>
             <StarsIcon />
       </Button>
       
@@ -86,9 +86,9 @@ export default function SimpleRating(props) {
         </DialogActions>
       </Dialog>
       }
-    </div>
+    
       
       
-    </div>
+    </>
   );
 }

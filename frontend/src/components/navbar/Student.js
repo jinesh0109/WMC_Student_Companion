@@ -64,7 +64,11 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     // backgroundColor: red[500],
     
+    
+      
+      // background: 'linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(70,252,232,1) 50%, rgba(187,111,199,1) 100%)'
 
+    
     justifyContent:"space-between",
 
   },
@@ -166,7 +170,7 @@ const[totalCredits,settotalCredits]=useState();
   }
   return (
     <div className={classes.root}  >
-      <AppBar position="static" style={{ position: "fixed",top: 0    }}>
+      <AppBar position="static" style={{ position: "fixed",top: 0,    }}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -193,7 +197,7 @@ const[totalCredits,settotalCredits]=useState();
           <Tab icon={<ThumbUp />} aria-label="down" {...a11yProps(6)} /> */}
         </Tabs>
       </AppBar>
-      <TabPanel  style={{marginTop:'15%'}}  value={value} index={0}>
+      <TabPanel  style={{marginTop:'5%'}}  value={value} index={0}>
       
         <Todo props={details.name} userid={details.id}/>
           

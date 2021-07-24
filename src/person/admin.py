@@ -12,9 +12,14 @@ admin.site.register(Faculty)
 admin.site.register(Student)
 admin.site.register(Programme)
 
-admin.site.register(CourseStudent)
+# admin.site.register(CourseStudent)
 admin.site.register(CreditModel)
    
 @admin.register(TodoData)
 class todoAdmin(admin.ModelAdmin):
     list_display=('title','due_date','complete')
+
+
+@admin.register(CourseStudent)
+class CreditAdmin(admin.ModelAdmin):
+    list_display=('student','course','rating')

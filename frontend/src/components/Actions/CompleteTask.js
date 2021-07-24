@@ -47,17 +47,18 @@ const CompleteTask=(props)=>{
     return (<>
 
 
-         
+         <button>
          <Button
                             variant="contained"
-                            color="secondary"
-                        
+                            color="white"
+                            
                             startIcon={<DoneOutlineIcon />}
                             onClick={()=>{setOpen(true);setCompleteAlertId(task.id)}}
                             disabled={task.complete}
                         >
                             Complete
                         </Button>
+                        </button>
             {open&& task.id==CompleteAlertId &&
                           
             
@@ -67,7 +68,7 @@ const CompleteTask=(props)=>{
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
-            <DialogTitle id="alert-dialog-title">{"Are you sure you Completed it?"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Are you sure you completed it?"}</DialogTitle>
             <DialogContent>
             <DialogContentText id="alert-dialog-description">
                 Task Title: {task.title}

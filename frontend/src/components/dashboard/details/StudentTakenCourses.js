@@ -42,8 +42,10 @@ const useStyles = makeStyles((theme) => ({
     maxHeight:400,
     alignItems:'center',
     justifyContent:'center',
-    backgroundColor:'pink',
+    // backgroundColor:'pink',
     overflowY:'auto',
+    background: 'linear-gradient(90deg, rgba(224,238,174,1) 0%, rgba(70,230,16,1) 51%, rgba(148,233,199,1) 100%)',  
+
   },
   
   avatarName: {
@@ -57,8 +59,8 @@ const useStyles = makeStyles((theme) => ({
     width:350,
     // height:100,
     fontWeight: 'bold',
-    fontSize:50,
-    color:'orange',
+    fontSize:40,
+    color:'red',
     alignItems:'center',
     justifyContent:'center',
     // overflowY:'auto',
@@ -114,21 +116,28 @@ export default function RecipeReviewCard(props) {
           </Avatar>
         }
         title={<span className={classes.cardHeader}>{course.name}</span>}
-        subheader={course.faculty!=null&& <>{'Faculty: '+course.faculty.name}</>}
+        subheader={ course.faculty!=null&& <span style={{fontSize:20,color:'#00008B'}}>{'Faculty: '+course.faculty.name}</span>}
         
       />
       
       <CardContent>
         <Typography className={classes.desc} variant="body2" color="textSecondary" component="p">
        <span className={classes.descData}> Description</span> <br/>
-          {course.description}
+          <span style={{color:'black',fontSize:15}}>
+              {course.description}
+          </span>
         </Typography>
       </CardContent>
       
         
-        <Ratings props={course}/>
-       <CompleteCourse props={course}/>
-        
+        <span>
+        &nbsp;&nbsp;&nbsp;&nbsp;<Ratings props={course}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <CompleteCourse props={course}/>
+          
+              
+        </span>
+       <br/><br/>
+        Average Rating: {course.completedCourse.avgRating}
       
       
     </Card>

@@ -57,8 +57,9 @@ export default function ContainedButtons(props) {
 
 
   return (
-    <>
-    <h1 className="todoH1">  Hello {username},Come on Dude Start Working! Do your Tasks or die!!</h1>
+    <div className="todoH1">
+    <h1></h1>
+    <h1 style={{color:'black',backgroundColor:'white',marginTop:100}}>  Hello {username},Come on Dude Start Working! Do your Tasks or die!!</h1>
     <div className={classes.root}>
       <Button onClick={()=>{setShowPage(0)}} variant="contained" color="secondary">All Tasks</Button>
       <Button onClick={()=>{setShowPage(1)}} variant="contained" color="primary">
@@ -77,6 +78,6 @@ export default function ContainedButtons(props) {
       {showPage==2&&<PendingTask props={taskList}/>}
       {showPage==3&&<CompletedTask props={taskList}/>}
     </div>
-    </>
+    </div>
   );
 }

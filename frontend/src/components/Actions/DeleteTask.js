@@ -55,15 +55,15 @@ const DeleteTask=(props)=>{
 
 
          {/* DELETE BUTTON */}
-         <Button
+         <button ><Button
                             variant="contained"
-                            color="secondary"
+                            color="black"
                         
                             startIcon={<DeleteIcon />}
                             onClick={()=>{setOpen(true);setDeleteAlertId(task.id)}}
                         >
                             Delete
-                        </Button>
+                        </Button></button>
             {open&& task.id==deleteAlertId &&
                           
             

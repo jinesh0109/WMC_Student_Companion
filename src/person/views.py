@@ -62,7 +62,17 @@ class particular_student(generics.ListAPIView):
         # print('----------------')
         # print(completedQueryset)
         for i in range(len(stud_data[0]['course'])):
+            # print(stud_data[0]['course'])
             stud_data[0]['course'][i]['completedCourse']=courseStudentSerializer( CourseStudent.objects.filter(student__in=stud_obj,course=stud_data[0]['course'][i]['id'])[0]).data
+            totalobjData=courseStudentSerializer( CourseStudent.objects.filter(course=stud_data[0]['course'][i]['id'])[0]).data
+            avgrating=0
+            n=len(CourseStudent.objects.filter(course=stud_data[0]['course'][i]['id']))
+            for j in range(len(CourseStudent.objects.filter(course=stud_data[0]['course'][i]['id']))):
+                cor= courseStudentSerializer(CourseStudent.objects.filter(course=stud_data[0]['course'][i]['id'])[j]).data
+                avgrating=avgrating+ int(cor['rating'])
+            avgrating=avgrating/n
+
+            stud_data[0]['course'][i]['completedCourse']['avgRating']=avgrating
             stud_data[0]['course'][i]['faculty']=FacultySerializer( Faculty.objects.get(id=stud_data[0]['course'][i]['faculty'])).data
             stud_data[0]['course'][i]['building']=BuildingSerializer( Building.objects.get(id=stud_data[0]['course'][i]['building'])).data
             cat=[]
@@ -275,8 +285,6 @@ class creditDetail(generics.ListCreateAPIView):
 #       Processing student completed courses            
             temp=0
             for j in range(len(stud_data['course'])):
-                
-                
                 
                 courseStudent_data=courseStudentSerializer( CourseStudent.objects.filter(student=stud_data['id'],course=stud_data['course'][j]['id'])[0]).data
                 

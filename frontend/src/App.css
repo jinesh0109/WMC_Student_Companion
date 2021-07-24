@@ -113,10 +113,14 @@ body, html, .App, #root, .outer {
 .todoH1 {
   text-align:center;
   font-family:cursive;
-
-	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+/* background-color: #46fcb4; */
+/* background: rgb(19, 236, 236); */
+/* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(17,255,180,1) 0%, rgba(0,212,255,1) 100%); */
+	/* background: #6e707c;
+background: linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(70,252,232,1) 50%, rgba(187,111,199,1) 100%); */
 	background-size: 400% 400%;
-	animation: gradient 10s ease infinite;
+  background-color: white;
+	/* animation: gradient 5s ease infinite; */
 }
 
 @keyframes gradient {

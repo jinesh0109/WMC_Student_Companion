@@ -50,7 +50,7 @@ const CompleteCourse=(props)=>{
          
          <Button
                             variant="contained"
-                            color="secondary"
+                            color="primary"
                         
                             startIcon={<DoneOutlineIcon />}
                             onClick={()=>{setOpen(true);setCompleteAlertId(Course.id)}}

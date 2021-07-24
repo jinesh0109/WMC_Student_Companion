@@ -12,19 +12,24 @@ import CompleteTask from '../Actions/CompleteTask';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-    //   width: '100%',
+      backgroundColor:'#d5ff80',
+      // background: 'linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(70,252,232,1) 50%, rgba(187,111,199,1) 100%)'
+
     },
     button:{
         float:'right',
     },
     heading: {
-      fontSize: theme.typography.pxToRem(15),
+      fontSize: 25,
       flexBasis: '33.33%',
       flexShrink: 0,
+      font:'bold',
+      fontFamily:'cursive',
     },
     secondaryHeading: {
-      fontSize: theme.typography.pxToRem(15),
-      color: theme.palette.text.secondary,
+      fontSize: 20,
+      font:'bold',
+      // color: theme.palette.text.secondary,
     },
   }));
 
@@ -47,12 +52,12 @@ const AllTask=(props)=>{
     return date.slice(0,10)+' Time:'+date.slice(11,19);
   }
   return (
-    <div className={classes.root}>
+    <div >
       
      {taskList&&
         taskList.map((task)=>{
             return (
-                <Accordion expanded={expanded === `${task.id}`} onChange={handleChange(`${task.id}`)}>
+                <Accordion className={classes.root} expanded={expanded === `${task.id}`} onChange={handleChange(`${task.id}`)}>
                     <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel2bh-content"
@@ -65,12 +70,13 @@ const AllTask=(props)=>{
                               {'Due: '+dateFormatter(task.due_date)}
                           </Typography>
                         }
-                       <DeleteTask props={task}/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       <DeleteTask props={task}/>&nbsp;&nbsp;&nbsp;
                        <CompleteTask props={task}/>
 
                     </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
+                    <AccordionDetails >
+                        <Typography style={{fontSize:20,fontFamily:'sans-serif'}}>
                             {task.desc}
                         </Typography>
                     </AccordionDetails>
