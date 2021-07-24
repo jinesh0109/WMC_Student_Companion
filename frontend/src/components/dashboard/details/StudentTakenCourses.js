@@ -18,9 +18,10 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from 'react-bootstrap/Button';
-
+import StarsIcon from '@material-ui/icons/Stars';
 //
 import CompleteCourse from '../../Actions/CompleteCourse'
+import Ratings from './Ratings';
 // https://material-ui.com/components/cards/
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -124,10 +125,8 @@ export default function RecipeReviewCard(props) {
         </Typography>
       </CardContent>
       
-        <IconButton aria-label="add to favorites">
-          <FeedbackIcon />
-        </IconButton>
-
+        
+        <Ratings props={course}/>
        <CompleteCourse props={course}/>
         
       

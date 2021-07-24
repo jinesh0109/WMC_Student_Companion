@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import CreateUserAPIView, completedCourse, completedCourseUpdate, creditDetail,studentList,particular_student,getUserDetailFromAuth,showStudent
+from .views import CreateUserAPIView, RatingPost, completedCourse, completedCourseUpdate, creditDetail,studentList,particular_student,getUserDetailFromAuth,showStudent
 from .views import programmeListCreateClass,ToDoCreateList,ToDoRetUpdDest
 from django.conf.urls.static import static
 from django.conf import settings
@@ -25,5 +25,6 @@ urlpatterns = [
     path('completedcourse/<int:pk>/',completedCourseUpdate.as_view()),
 
     path('credit/',creditDetail.as_view()),
+    path('credit/<int:pk>/',RatingPost.as_view()),
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

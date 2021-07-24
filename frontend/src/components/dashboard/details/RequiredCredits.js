@@ -55,7 +55,14 @@ const RequiredCredits=(props)=>{
     const RequiredCredits=props.props;
     console.log(RequiredCredits);
     const classes = useStyles();
-
+    let totcur=0;let totreq=0;
+    for (let i = 0; i < RequiredCredits.current_credit.length; i++) {
+        totcur += RequiredCredits.current_credit[i] ;
+      }
+      for (let i = 0; i < RequiredCredits.requiredCredit.length; i++) {
+        totreq += RequiredCredits.requiredCredit[i] ;
+      }
+      console.log(totcur,totreq)
   return (
       <div className={classes.tableHead}>
     <TableContainer  component={Paper}>
@@ -80,6 +87,15 @@ const RequiredCredits=(props)=>{
               
             </StyledTableRow>
           ))}
+          <StyledTableRow >
+              <StyledTableCell component="th" scope="row">
+                {'Total'}
+              </StyledTableCell>
+              <StyledTableCell >{totcur}</StyledTableCell>
+              <StyledTableCell >{totreq}</StyledTableCell>
+              
+            </StyledTableRow>
+            
         </TableBody>
       </Table>
     </TableContainer>

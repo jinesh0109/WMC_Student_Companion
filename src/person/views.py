@@ -110,17 +110,17 @@ class studentList(generics.ListCreateAPIView):
         return self.list(request, *args, **kwargs)
     def post(self, request, *args, **kwargs):
         
-        user = NewUser.objects.get(email=request.data["email"])
-        # prog=Programme.objects.get(id=request.data["program"])
-        # prog_data=programeSerializer(prog).data
+        user = NewUser.objects.get(email=request.data['email'])
+        prog=Programme.objects.get(id=request.data['program'])
+        prog_data=programeSerializer(prog).data
         # print(prog_data)
         # request.data['program']=prog_data['id']
         
         request.data['user']=user
         print(request.data)
         s=Student(user=request.data['user'],name=request.data['name'],enr_num=request.data['enr_num'],
-           program=request.data['program'] )
-        print(s)
+           program=prog )
+        
         s.save()
         if(request.user.is_student):
             return HttpResponse('Unauthorized', status=401)
@@ -164,14 +164,16 @@ class ToDoCreateList(generics.ListCreateAPIView):
     authentication_classes=[TokenAuthentication,]
     permission_classes=[IsAuthenticated,]
     serializer_class=TodoSerializer
-    queryset=TodoData.objects.all().order_by('due_date')
+    # queryset=TodoData.objects.all().order_by('due_date')
     # def get(self, request, *args, **kwargs):
     #     student_obj=Student.objects.get(id=NewUser.objects.get(email=request.user).id)
     #     student_data=studentSerializer(student_obj).data
     #     res=TodoData.objects.filter(student=student_data.id)
 
     #     return Response(res)
-    
+    def get_queryset(self):
+        stud_obj=Student.objects.get(user=self.request.user).id
+        return (TodoData.objects.filter(student=stud_obj))
     def post(self, request, *args, **kwargs):
         title=request.data['title']
         desc=request.data['desc']
@@ -234,7 +236,7 @@ class completedCourseUpdate(generics.RetrieveUpdateAPIView):
     queryset=CourseStudent.objects.all()
     def put(self, request, *args, **kwargs):
         request.data['student']=Student.objects.get(user=request.user).id
-        print(request.data)
+        
         return self.update(request, *args, **kwargs)
 
 class creditDetail(generics.ListCreateAPIView):
@@ -277,7 +279,7 @@ class creditDetail(generics.ListCreateAPIView):
                 
                 
                 courseStudent_data=courseStudentSerializer( CourseStudent.objects.filter(student=stud_data['id'],course=stud_data['course'][j]['id'])[0]).data
-                print('----------------')
+                
                 if(courseStudent_data['completed']==False):
                     continue
                 for k in range(len(stud_data['course'][j]['cat'])):
@@ -297,3 +299,14 @@ class creditDetail(generics.ListCreateAPIView):
         res['current_credit']=current_credit
 
         return Response(res)
+
+
+class RatingPost(generics.UpdateAPIView):
+    authentication_classes=[TokenAuthentication,]
+    permission_classes=[IsAuthenticated,]
+    serializer_class=courseStudentSerializer
+    queryset=CourseStudent.objects.all()
+    def put(self, request, *args, **kwargs):
+        stud=request.user
+        request.data['student']= Student.objects.get( user=NewUser.objects.get(email=stud)).id
+        return self.update(request, *args, **kwargs)
