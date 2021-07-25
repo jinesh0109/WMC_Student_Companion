@@ -70,7 +70,7 @@ export default function SimpleRating(props) {
                 value={value}
                 onChange={(event, newValue) => {
                     setValue((newValue));
-                    console.log(value);
+                    
                 }}
                 />
             </Box>

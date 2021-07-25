@@ -66,12 +66,17 @@ class particular_student(generics.ListAPIView):
             stud_data[0]['course'][i]['completedCourse']=courseStudentSerializer( CourseStudent.objects.filter(student__in=stud_obj,course=stud_data[0]['course'][i]['id'])[0]).data
             totalobjData=courseStudentSerializer( CourseStudent.objects.filter(course=stud_data[0]['course'][i]['id'])[0]).data
             avgrating=0
+            minus=0
             n=len(CourseStudent.objects.filter(course=stud_data[0]['course'][i]['id']))
             for j in range(len(CourseStudent.objects.filter(course=stud_data[0]['course'][i]['id']))):
                 cor= courseStudentSerializer(CourseStudent.objects.filter(course=stud_data[0]['course'][i]['id'])[j]).data
                 avgrating=avgrating+ int(cor['rating'])
-            avgrating=avgrating/n
-
+                if(int(cor['rating'])==0):
+                    minus=minus+1
+            if(n-minus>0):
+                avgrating=avgrating/(n-minus)
+            else:
+                avgrating=0
             stud_data[0]['course'][i]['completedCourse']['avgRating']=avgrating
             stud_data[0]['course'][i]['faculty']=FacultySerializer( Faculty.objects.get(id=stud_data[0]['course'][i]['faculty'])).data
             stud_data[0]['course'][i]['building']=BuildingSerializer( Building.objects.get(id=stud_data[0]['course'][i]['building'])).data

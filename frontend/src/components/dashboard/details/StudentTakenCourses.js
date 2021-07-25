@@ -22,6 +22,7 @@ import StarsIcon from '@material-ui/icons/Stars';
 //
 import CompleteCourse from '../../Actions/CompleteCourse'
 import Ratings from './Ratings';
+import AverageRating from './AverageRating';
 // https://material-ui.com/components/cards/
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -137,9 +138,11 @@ export default function RecipeReviewCard(props) {
               
         </span>
        <br/><br/>
-        Average Rating: {course.completedCourse.avgRating}
-      
-      
+      <div style={{textAlign:'center'}}>
+        <AverageRating props={course.completedCourse.avgRating}/>
+          <br/>
+        <span style={{color:'blue'}}>Average rating : {course.completedCourse.avgRating}</span>
+      </div>
     </Card>
     </div>
       )
