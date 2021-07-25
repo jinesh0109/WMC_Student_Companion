@@ -194,10 +194,10 @@ class ToDoCreateList(generics.ListCreateAPIView):
         desc=request.data['desc']
         due_date=request.data['due_date']
         # send_mail('New Task','Ok it is sent','temporary1209tp@gmail.com',[request.user])
-        send_mail('Task Alert','This is your task notification email.\n\nThe following is your task detail:\nTitle:  '+title+'\n\n'
-        +'This is your description:\n'+desc+'\n\n'+'Due Date: '+due_date+'\n'+
-        'Complete your Task before due date.',
-        'temporary1209tp@gmail.com',[request.user])
+        # send_mail('Task Alert','This is your task notification email.\n\nThe following is your task detail:\nTitle:  '+title+'\n\n'
+        # +'This is your description:\n'+desc+'\n\n'+'Due Date: '+due_date+'\n'+
+        # 'Complete your Task before due date.',
+        # 'temporary1209tp@gmail.com',[request.user])
         request.data['student']=Student.objects.get(user=NewUser.objects.get(email= request.user)).id
         print(request.data)
         return self.create(request, *args, **kwargs)

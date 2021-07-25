@@ -13,16 +13,18 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { blue, green, purple, red } from '@material-ui/core/colors';
-import FeedbackIcon from '@material-ui/icons/Feedback';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Button from 'react-bootstrap/Button';
-import StarsIcon from '@material-ui/icons/Stars';
-//
+import SearchIcon from '@material-ui/icons/Search';
 import CompleteCourse from '../../Actions/CompleteCourse'
 import Ratings from './Ratings';
 import AverageRating from './AverageRating';
+import SearchBar from "material-ui-search-bar"; 
+import ClearIcon from '@material-ui/icons/Clear';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import TextField from '@material-ui/core/TextField';
 // https://material-ui.com/components/cards/
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,6 +81,10 @@ const useStyles = makeStyles((theme) => ({
     color:'black',
 
   },
+  textField:{
+    width:'100%',
+    // background
+  }
 }));
 
 export default function RecipeReviewCard(props) {
@@ -89,18 +95,83 @@ export default function RecipeReviewCard(props) {
    
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const[seacrchCri,setseacrchCri]=useState(10);
+  const [filteredData, setfilteredData] = React.useState(details);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  ///search
+  const handleSearch = (event) =>{
 
+    let value = event.target.value.toLowerCase().trim();
+    let result = [];
+    console.log(value);
+    if(seacrchCri==10){
+      result = details.filter((data) => {
+        return data.name.toLowerCase().trim().search(value) != -1;
+    });
+  }
+    else if(seacrchCri==20){
+      result = details.filter((data) => {
+        return data.faculty.name.toLowerCase().trim().search(value) != -1;
+    });
+    }
+    else if(seacrchCri==30){
+      result = details.filter((data) => {
+        return data.credit == value;
+    });
+    }
+    setfilteredData(result);
+  }
+  const changeCriteria=(event)=>{
+    setseacrchCri(event.target.value);
+
+  }
   return (
     <>
+    <TextField
+        variant="standard"
+        value={props.value}
+        onChange={handleSearch}
+        placeholder="Search…"
+        className={classes.textField}
+        InputProps={{
+          startAdornment: <SearchIcon fontSize="small" />,
+          endAdornment: (
+            <IconButton
+              title="Clear"
+              aria-label="Clear"
+              size="small"
+              style={{ visibility: props.value ? 'visible' : 'hidden' }}
+              onClick={props.clearSearch}
+            >
+              <ClearIcon fontSize="small" />
+            </IconButton>
+          ),
+        }}
+      />
+       <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="uncontrolled-native"></InputLabel>
+        <NativeSelect onChange={changeCriteria} value={seacrchCri}
+          
+          inputProps={{
+            name: 'name',
+            id: 'uncontrolled-native',
+          }}
+        >
+          <option value={10}>Course Name</option>
+          <option value={20}>Faculty</option>
+          <option value={30}>Credit</option>
+        </NativeSelect>
+        <FormHelperText>Select Criteria</FormHelperText>
+      </FormControl>
     
+  {/* <SearchBar   onChange={(event) =>handleSearch(event)}/> */}
     <div  className={classes.root}>
     
   
-    {details.map((course)=>{
+    {filteredData&&filteredData.map((course)=>{
       return(
       <div key={course.id}>
     <Card  className={classes.root2}>
