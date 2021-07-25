@@ -216,6 +216,17 @@ export default function RecipeReviewCard(props) {
           <br/>
         <span style={{color:'darkblue'}}>Average rating : {(Math.round(course.completedCourse.avgRating * 100) / 100).toFixed(1)}</span>
       </div>
+      <br/><br/>
+       {
+        course&&course.cat&& <div style={{textAlign:"center",color:'darkblue'}}> 
+        Categories:<br/>
+          {course.cat.map((category)=>{
+            return <>{(category.abbreviation)}<br/></>
+            })
+          }
+        </div>
+      }
+      <br/>
     </Card>
     </div>
       )

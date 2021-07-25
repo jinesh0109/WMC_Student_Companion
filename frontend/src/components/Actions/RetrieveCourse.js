@@ -29,7 +29,7 @@ const RetrieveCourse=(props)=>{
     const {name,description,credit,faculty,cat,building,id}=props.props;
 
     const [detail,setDetail]=useState({name:name,description:description,credit:credit,faculty:faculty,cat:cat,building:building,id:id})
-console.log(detail.id)
+    console.log(detail.id)
     const [wholeData,setWholeData]=useState();
     
     //Material UI Part
