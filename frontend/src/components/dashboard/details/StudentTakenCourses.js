@@ -138,10 +138,12 @@ export default function RecipeReviewCard(props) {
               
         </span>
        <br/><br/>
-      <div style={{textAlign:'center'}}>
-        <AverageRating props={course.completedCourse.avgRating}/>
+      <div style={{textAlign:'center',fontSize:20}}>
+      
+
+        <AverageRating props={(Math.round(course.completedCourse.avgRating * 100) / 100).toFixed(1)}/>
           <br/>
-        <span style={{color:'blue'}}>Average rating : {course.completedCourse.avgRating}</span>
+        <span style={{color:'darkblue'}}>Average rating : {(Math.round(course.completedCourse.avgRating * 100) / 100).toFixed(1)}</span>
       </div>
     </Card>
     </div>

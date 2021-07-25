@@ -12,7 +12,7 @@ import '../../App.css';
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
-      margin: theme.spacing(3),
+      margin: theme.spacing(2),
       
     },
     

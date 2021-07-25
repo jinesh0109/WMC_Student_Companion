@@ -47,32 +47,27 @@ const email=localStorage.getItem('email');
               color="textSecondary"
               variant="body1"
             >
+            <br/>
             Enrollment Number:  {`${details.enr_num} `}
             </Typography>
             <Typography
               color="textSecondary"
               variant="body1"
             >
+            <br/><br/>
              {`Email: ${email}`}
             </Typography>
             <Typography
               color="textSecondary"
               variant="body1"
             >
+            <br/>
              {`Major:  ${details.program} `}
             </Typography>
           </Box>
         </CardContent>
         <Divider />
-        <CardActions>
-          <Button
-            color="primary"
-            fullWidth
-            variant="text"
-          >
-            Upload picture
-          </Button>
-        </CardActions>
+        
       </Card>
   </>
   )

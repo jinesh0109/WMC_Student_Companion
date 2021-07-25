@@ -7,11 +7,22 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { makeStyles } from '@material-ui/core/styles';
+import { createTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+import { green, lightBlue, purple } from '@material-ui/core/colors'
 import moment from 'moment';
 const CompleteTask=(props)=>{
-    
+    const ColorButton = withStyles((theme) => ({
+        root: {
+          color: theme.palette.getContrastText(purple[500]),
+          backgroundColor: purple[300],
+          '&:hover': {
+            backgroundColor: purple[500],
+          },
+        },
+      }))(Button);
+
     const task=props.props;
     
     // task.due_date=moment(task.due_date, "DD-MM-YYYY hh:mm:ss").format("YYYY-MM-DD hh:mm:ss")
@@ -47,18 +58,18 @@ const CompleteTask=(props)=>{
     return (<>
 
 
-         <button>
-         <Button
+         
+         <ColorButton
                             variant="contained"
-                            color="white"
+                            
                             
                             startIcon={<DoneOutlineIcon />}
                             onClick={()=>{setOpen(true);setCompleteAlertId(task.id)}}
                             disabled={task.complete}
                         >
                             Complete
-                        </Button>
-                        </button>
+                        </ColorButton>
+                        
             {open&& task.id==CompleteAlertId &&
                           
             

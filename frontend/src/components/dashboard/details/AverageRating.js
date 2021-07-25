@@ -24,7 +24,7 @@ export default function AverageRating(props) {
       <Rating
         name="hover-feedback"
         value={value}
-        precision={0.5}
+        precision={0.2}
         readOnly 
         
       />

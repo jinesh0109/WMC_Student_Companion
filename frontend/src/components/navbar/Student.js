@@ -12,8 +12,8 @@ import HelpIcon from '@material-ui/icons/Help';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import '../../App.css';
-
-
+import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 //components
 import StudentProfile from '../dashboard/details/StudentProfile2';
@@ -22,7 +22,7 @@ import Todo from '../ToDo/Todo';
 import { red } from '@material-ui/core/colors';
 import CompletedCourses from '../dashboard/details/CompletedCourses';
 import RequiredCredits from '../dashboard/details/RequiredCredits';
-
+import MoodBadIcon from '@material-ui/icons/MoodBad';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -182,15 +182,15 @@ const[totalCredits,settotalCredits]=useState();
         
   
 
-          <Tab   style={sytleTp} label="Todo List" icon={<PhoneIcon /> } aria-label="phone" {...a11yProps(0)} />
+          <Tab   style={sytleTp}  label="Todo List" icon={<FormatListNumberedIcon /> } aria-label="phone" {...a11yProps(0)} />
         
           <Tab style={sytleTp} label="Course" icon={<FavoriteIcon />} aria-label="favorite" {...a11yProps(1)} />
           <Tab style={sytleTp} label="Completed Courses" icon={<FavoriteIcon />} aria-label="favorite" {...a11yProps(2)} />
-          <Tab style={sytleTp} label="Required Credits" icon={<PersonPinIcon />} aria-label="person" {...a11yProps(3)} />
+          <Tab style={sytleTp} label="Required Credits" icon={<MoodBadIcon />} aria-label="person" {...a11yProps(3)} />
           <Tab style={sytleTp} label="Profile" icon={<PersonPinIcon />} aria-label="person" {...a11yProps(4)} />
           
           
-          <Tab style={{}} label="Logout" icon={<HelpIcon />} aria-label="help" {...a11yProps(5)} />
+          <Tab style={{}} label="Logout" icon={<ExitToAppIcon />} aria-label="help" {...a11yProps(5)} />
           
           {/* <Tab icon={<ShoppingBasket />} aria-label="shopping" {...a11yProps(4)} />
           <Tab icon={<ThumbDown />} aria-label="up" {...a11yProps(5)} />

@@ -7,7 +7,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { makeStyles } from '@material-ui/core/styles';
+import { createTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { red } from '@material-ui/core/colors';
+
 
 const useStyles = makeStyles((theme) => ({
         
@@ -49,21 +51,30 @@ const DeleteTask=(props)=>{
             alert('Delete Unsuccessfull');})
     };
     // const classes = useStyles();
-    
+    const ColorButton = withStyles((theme) => ({
+        root: {
+          color: theme.palette.getContrastText(red[500]),
+          backgroundColor: red[400],
+          '&:hover': {
+            backgroundColor: red[700],
+          },
+        },
+      }))(Button);
+
 
     return (<>
 
 
          {/* DELETE BUTTON */}
-         <button ><Button
+         <ColorButton
                             variant="contained"
-                            color="black"
+                            
                         
                             startIcon={<DeleteIcon />}
                             onClick={()=>{setOpen(true);setDeleteAlertId(task.id)}}
                         >
                             Delete
-                        </Button></button>
+                        </ColorButton>
             {open&& task.id==deleteAlertId &&
                           
             
