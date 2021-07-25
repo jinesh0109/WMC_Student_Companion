@@ -278,12 +278,12 @@ const EnrollStudentData=(detail)=>{
                     studentDetail.map((item,index)=>{
                         return(
                             <>
-                            <List>
-                        <ListItem>
-                        <div>
+                            
+                        
+                            
                             <label key={item.id}>
                                 
-                                <Accordion className={classes.accColor} expanded={expanded === index} onChange={handleChangeAll(index)}>
+                                <Accordion  className={classes.accColor} expanded={expanded === index} onChange={handleChangeAll(index)}>
                                     <AccordionSummary
                                     
                                     aria-controls="panel1bh-content"
@@ -300,9 +300,9 @@ const EnrollStudentData=(detail)=>{
                                 {/* <Checkbox1 name={item.id}  value={item.id} checked={checkedItems.item&&checkedItems.item.id} onChange={handleChange}/> */}
                                 
                             </label>
-                            </div>
-                            </ListItem>
-                            </List>
+                            
+                            
+                            
                             </>
                         );
                     }
