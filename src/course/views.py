@@ -4,7 +4,7 @@ from django.shortcuts import render
 from .serializers import BuildingSerializer, CategorySerializer, CourseSerializer, FacultySerializer
 from rest_framework.generics import ListAPIView, ListCreateAPIView,RetrieveUpdateDestroyAPIView
 from .models import course,category,Building
-from person.models import Faculty
+from person.models import CourseStudent, Faculty
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -14,7 +14,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.views.decorators.csrf import csrf_exempt
 from person.models import Student;
 from rest_framework.views import APIView
-from person.models import CourseStudent
+
 
 # Create your views here.
 # @csrf_exempt 
@@ -80,8 +80,8 @@ class CourseList(ListCreateAPIView):
 
 
 class CourseRUD(RetrieveUpdateDestroyAPIView):
-    authentication_classes=[TokenAuthentication,]
-    permission_classes=[IsAuthenticated,]
+    # authentication_classes=[TokenAuthentication,]
+    # permission_classes=[IsAuthenticated,]
     queryset=course.objects.all()
     serializer_class=CourseSerializer
 
@@ -168,6 +168,95 @@ class CourseRUD(RetrieveUpdateDestroyAPIView):
             return HttpResponse('Unauthorized', status=401)
         return self.destroy(request, *args, **kwargs)
                     
+
+
+        
+        
+        
+            
+        
+
+        
+#         # if(request.user.is_student):
+#         #     return HttpResponse('Unauthorized', status=401)
+#         # fac_obj1=Faculty.objects.get(id=request.data['faculty'])
+#         # build_obj=Building.objects.get(id=request.data['building'])
+        
+        
+        
+    
+#     def delete(self, request, *args, **kwargs):
+#         if(request.user.is_student):
+#             return HttpResponse('Unauthorized', status=401)
+#         return self.destroy(request, *args, **kwargs)
+
+
+# class CourseRUD(APIView):
+#     # authentication_classes=[TokenAuthentication,]
+#     # permission_classes=[IsAuthenticated,]
+#     # queryset=course.objects.all()
+#     # serializer_class=CourseSerializer
+
+#     # def get(self, request, *args, **kwargs):
+#     #     # if(request.user.is_student):
+#     #     #     return HttpResponse('Unauthorized', status=401)
+#     #     return self.retrieve(request, *args, **kwargs)
+
+#     def post(self, request, *args, **kwargs):
+        
+#         # course.objects.create()
+#         print(request.data)
+#         student_obj=[]
+    
+#         fac_obj1=Faculty.objects.get(id=request.data['faculty'])
+#         build_obj=Building.objects.get(id=request.data['building'])
+        
+    
+#         category_obj=[]
+#         for i in request.data['cat']:
+#             if(request.data['cat'][i]==True):
+#                 ct_obj=category.objects.get(id=i)
+#                 category_obj.append(ct_obj)
+#         # print(category_obj)
+#         # l=[category_obj.id]
+#         # BuildingSerializer, CategorySerializer, CourseSerializer, FacultySerializer
+#         request.data['faculty']=fac_obj1
+#         request.data['building']=build_obj
+#         request.data['cat']=category_obj
+
+#         crs = course.objects.get(id=request.data["id"])
+
+#         crs.name = request.data["name"]
+#         crs.description = request.data["description"]
+#         crs.credit = request.data["credit"]
+#         crs.faculty = fac_obj1
+#         crs.building = build_obj
+#         crs.cat = category_obj
+
+#         crs.save()
+
+#         print(request.data)
+#         return Response({"success":"updated"})
+                
+
+
+        
+        
+        
+            
+        
+
+        
+        # if(request.user.is_student):
+        #     return HttpResponse('Unauthorized', status=401)
+        # fac_obj1=Faculty.objects.get(id=request.data['faculty'])
+        # build_obj=Building.objects.get(id=request.data['building'])
+        
+        
+        
+    
+    
+
 
 class FacultyList(ListCreateAPIView):
     authentication_classes=[TokenAuthentication,]

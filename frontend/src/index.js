@@ -5,8 +5,8 @@ import App2 from './App2';
 import reportWebVitals from './reportWebVitals';
 
 //bootstrap
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 
 

@@ -1,5 +1,4 @@
-import React,{useEffect,useState} from 'react';
-import Axios from 'axios';
+import React,{useState,useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,18 +8,16 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import HelpIcon from '@material-ui/icons/Help';
-import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
-import ThumbDown from '@material-ui/icons/ThumbDown';
-import ThumbUp from '@material-ui/icons/ThumbUp';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import axios from 'axios';
 
-import {NavLink} from 'react-router-dom';
 
 
 //components
 import Admin_Student from '../dashboard/details/Admin_student';
-
+import Admin_course from '../dashboard/details/Admin_course';
+import EnrollStudent from '../Actions/EnrollStudent';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -86,59 +83,116 @@ export default function Navbar() {
     window.location.replace('/');
   }
 
-
-
-
-
-///course-jinesh
+  ///course-jinesh
   
-const[listCourses,setListCourses]=useState([])
-const tok=localStorage.getItem('token');
-useEffect(()=>{
-    Axios.get('http://127.0.0.1:8000/course/course_list/',
-    {
-        headers: {
-        'Authorization': `token ${tok}`,
-        }
-    }
-    ).then((res)=>{
-        const courses=res.data;
-        console.log(courses);
-      
-        setListCourses(courses);
-        
-    });
-},[]);
+  const[listCourses,setListCourses]=useState([])
 
-//Student-Poojan
+  const[facultyData,setfacultyData]=useState();
+  const[categoryData,setCategoryData]=useState();
+  const[buildingData,setBuildingData]=useState();
 
-const [listItems,setlistItems]=useState([]);
-  
-  
-  useEffect(() => {
-      Axios.get(`http://127.0.0.1:8000/person/students/`,{
+  const tok=localStorage.getItem('token');
+  useEffect(()=>{
+      axios.get('http://127.0.0.1:8000/course/course_list/',
+      {
           headers: {
           'Authorization': `token ${tok}`,
           }
-
-        }).then((res)=>{
-          // setStudentList(res.data);
-          const students=res.data;
-          console.log(students);
-         setlistItems( students);
-
-         
-        });
-          // console.log(res.data);
       }
-      
+      ).then((res)=>{
+          const courses=res.data[0];
+          console.log(res);
+          console.log('--------------------------------------------');
+        
+          setListCourses(courses);
+          
+      });
+  },[]);
+
+//Faculty,Building,Category Jinesh
+
+useEffect(()=>{
+  function getFacultyData(){
+       axios.get(`http://127.0.0.1:8000/course/faculty_list/`,{
+          headers:{
+             'Authorization': `token ${tok}`,
+          }
+      }).then((res)=>{
+          setfacultyData(res.data);
+      },
+      (error)=>{
+          console.log('Server Error');
+         }
+      );
+     }
+     getFacultyData();
+ },[] )
+
+ useEffect(()=>{
+      function getBuildingData(){
+           axios.get(`http://127.0.0.1:8000/course/building_list/`,{
+              headers:{
+                 'Authorization': `token ${tok}`,
+              }
+          }).then((res)=>{
+              setBuildingData(res.data);
+          },
+          (error)=>{
+              console.log('Server Error');
+             }
+          );
+         }
+         getBuildingData();
+     },[] )
      
-  , []);
+     
+
+     useEffect(()=>{
+          function getCategoryData(){
+              axios.get(`http://127.0.0.1:8000/course/category_list/`,{
+                  headers:{
+                     'Authorization': `token ${tok}`,
+                  }
+              }).then((res)=>{
+                  setCategoryData(res.data);
+                  
+              },
+              (error)=>{
+                  console.log('Server Error');
+                 }
+              );
+             }
+             getCategoryData();
+         },[] )
 
 
 
 
 
+  //Student-Poojan
+
+  const [listItems,setlistItems]=useState([]);
+    
+    
+    useEffect(() => {
+        axios.get(`http://127.0.0.1:8000/person/students/`,{
+            headers: {
+            'Authorization': `token ${tok}`,
+            }
+
+          }).then((res)=>{
+            // setStudentList(res.data);
+            const students=res.data;
+            console.log(students);
+           setlistItems( students);
+  
+           
+          });
+            // console.log(res.data);
+        }
+        
+       
+    , []);
 
 
   return (
@@ -158,7 +212,7 @@ const [listItems,setlistItems]=useState([]);
           <Tab   style={sytleTp} label="Student" icon={<PhoneIcon /> } aria-label="phone" {...a11yProps(0)} />
         
           <Tab style={sytleTp} label="Course" icon={<FavoriteIcon />} aria-label="favorite" {...a11yProps(1)} />
-          <Tab style={sytleTp} label="Edit Profile" icon={<PersonPinIcon />} aria-label="person" {...a11yProps(2)} />
+          <Tab style={sytleTp} label="Enroll Student" icon={<PersonPinIcon />} aria-label="person" {...a11yProps(2)} />
           <Tab style={{}} label="Logout" icon={<HelpIcon />} aria-label="help" {...a11yProps(3)} />
           
           {/* <Tab icon={<ShoppingBasket />} aria-label="shopping" {...a11yProps(4)} />
@@ -166,20 +220,20 @@ const [listItems,setlistItems]=useState([]);
           <Tab icon={<ThumbUp />} aria-label="down" {...a11yProps(6)} /> */}
         </Tabs>
       </AppBar>
-      <TabPanel  style={{marginTop:'15%'}}  value={value} index={0}>
+
+      <TabPanel  style={{marginTop:'10%'}}  value={value} index={0}>
         {/* { (is_student=='true')?  <></>:<Admin_Student/>  } */}
-        
-          
-        <Admin_Student props={listItems}/>
-        
-        
+          <Admin_Student props={listItems}/>
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
+
+      <TabPanel  style={{marginTop:'9%'}} value={value} index={1}>
+        <Admin_course props={listCourses} props1={facultyData} props2={categoryData} props3={buildingData}/>
       </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
+
+      <TabPanel  style={{marginTop:'10%'}} value={value} index={2}>
+        <EnrollStudent props={listCourses} props1={listItems}/>
       </TabPanel>
+
       <TabPanel value={value} index={3}>
         <Logout />
       </TabPanel>
