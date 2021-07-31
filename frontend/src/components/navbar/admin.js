@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import PhoneIcon from '@material-ui/icons/Phone';
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import HelpIcon from '@material-ui/icons/Help';
@@ -56,7 +56,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    backgroundColor: theme.palette.background.paper,
+    // backgroundColor: '#f2f2ff',
+    backgroundColor: '#F0F8FF',
     
 
     justifyContent:"space-between",
@@ -66,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
   const is_student=localStorage.getItem('is_student');
-  console.log(is_student);
+  // console.log(is_student);
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -101,8 +102,8 @@ export default function Navbar() {
       }
       ).then((res)=>{
           const courses=res.data[0];
-          console.log(res);
-          console.log('--------------------------------------------');
+          // console.log(res);
+          // console.log('--------------------------------------------');
         
           setListCourses(courses);
           
@@ -183,7 +184,7 @@ useEffect(()=>{
           }).then((res)=>{
             // setStudentList(res.data);
             const students=res.data;
-            console.log(students);
+            // console.log(students);
            setlistItems( students);
   
            
@@ -197,7 +198,7 @@ useEffect(()=>{
 
   return (
     <div className={classes.root}  >
-      <AppBar position="static" style={{ position: "fixed",top: 0    }}>
+      <AppBar  style={{ position: "fixed",top: 0 ,backgroundColor:'#4169E1'  }}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -209,7 +210,7 @@ useEffect(()=>{
         
   
 
-          <Tab   style={sytleTp} label="Student" icon={<PhoneIcon /> } aria-label="phone" {...a11yProps(0)} />
+          <Tab   style={sytleTp} label="Student" icon={<EmojiPeopleIcon /> } aria-label="phone" {...a11yProps(0)} />
         
           <Tab style={sytleTp} label="Course" icon={<FavoriteIcon />} aria-label="favorite" {...a11yProps(1)} />
           <Tab style={sytleTp} label="Enroll Student" icon={<PersonPinIcon />} aria-label="person" {...a11yProps(2)} />
@@ -220,17 +221,19 @@ useEffect(()=>{
           <Tab icon={<ThumbUp />} aria-label="down" {...a11yProps(6)} /> */}
         </Tabs>
       </AppBar>
-
-      <TabPanel  style={{marginTop:'10%'}}  value={value} index={0}>
-        {/* { (is_student=='true')?  <></>:<Admin_Student/>  } */}
-          <Admin_Student props={listItems}/>
-      </TabPanel>
-
-      <TabPanel  style={{marginTop:'9%'}} value={value} index={1}>
+      <div >
+        <TabPanel style={{position:'relative'}}  value={value} index={0}>
+          <br/><br/><br/><br/><br/><br/>
+            <Admin_Student props={listItems}/>
+        </TabPanel>
+    </div>
+      <TabPanel  style={{position:'relative'}} value={value} index={1}>
+      <br/><br/><br/><br/><br/><br/>
         <Admin_course props={listCourses} props1={facultyData} props2={categoryData} props3={buildingData}/>
       </TabPanel>
 
-      <TabPanel  style={{marginTop:'10%'}} value={value} index={2}>
+      <TabPanel  style={{position:'relative'}} value={value} index={2}>
+      <br/><br/><br/><br/><br/><br/>
         <EnrollStudent props={listCourses} props1={listItems}/>
       </TabPanel>
 

@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -88,9 +86,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RecipeReviewCard(props) {
-  console.log(props);
+  // console.log(props);
    const details=props.props;
-   console.log(details);
+  //  console.log(details);
    
    
   const classes = useStyles();
@@ -106,7 +104,7 @@ export default function RecipeReviewCard(props) {
 
     let value = event.target.value.toLowerCase().trim();
     let result = [];
-    console.log(value);
+    // console.log(value);
     if(seacrchCri==10){
       result = details.filter((data) => {
         return data.name.toLowerCase().trim().search(value) != -1;
@@ -119,13 +117,14 @@ export default function RecipeReviewCard(props) {
     }
     else if(seacrchCri==30){
       result = details.filter((data) => {
-        return data.credit == value;
+        return data.credit == value  || value=='';
     });
     }
     setfilteredData(result);
   }
   const changeCriteria=(event)=>{
     setseacrchCri(event.target.value);
+    
 
   }
   return (
@@ -216,10 +215,10 @@ export default function RecipeReviewCard(props) {
           <br/>
         <span style={{color:'darkblue'}}>Average rating : {(Math.round(course.completedCourse.avgRating * 100) / 100).toFixed(1)}</span>
       </div>
-      <br/><br/>
+      <br/>
        {
-        course&&course.cat&& <div style={{textAlign:"center",color:'darkblue'}}> 
-        Categories:<br/>
+        course&&course.cat&& <div style={{textAlign:"center",color:'black'}}> 
+        <span style={{fontWeight:'bold'}}>Categories:</span><br/>
           {course.cat.map((category)=>{
             return <>{(category.abbreviation)}<br/></>
             })

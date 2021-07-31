@@ -25,7 +25,7 @@ const CreateTask=()=>{
 
     const change=((event)=>{
         settaskData((prevVal)=>({...prevVal,[event.target.name]:event.target.value}))
-        console.log(getCurrentDate());
+        // console.log(getCurrentDate());
     });
     const sendData=(()=>{
         axios.post(`http://127.0.0.1:8000/person/todo/`,{title:taskData.title,desc:taskData.desc,due_date:taskData.due_date},{

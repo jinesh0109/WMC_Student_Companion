@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
   const is_student=localStorage.getItem('is_student');
-  console.log(is_student);
+  // console.log(is_student);
 
   //fetching data of present student
 
@@ -97,8 +97,8 @@ const[totalCredits,settotalCredits]=useState();
               'Authorization': `token ${x}`,
             }
       }).then((res)=>{
-          console.log(res.data[0]);
-          console.log(res);
+          // console.log(res.data[0]);
+          // console.log(res);
           if(res.data){
               setDetails(res.data[0]);
               // setDetails((prevVal)=>({...prevVal,[prevVal.course]:res.data[0].course}))
@@ -117,8 +117,8 @@ const[totalCredits,settotalCredits]=useState();
             'Authorization': `token ${x}`,
           }
     }).then((res)=>{
-        console.log(res.data);
-        console.log(res);
+        // console.log(res.data);
+        // console.log(res);
         if(res.data){
           settotalCredits(res.data);
             // setDetails((prevVal)=>({...prevVal,[prevVal.course]:res.data[0].course}))
@@ -131,26 +131,6 @@ const[totalCredits,settotalCredits]=useState();
 
     })
 },[]);
-
-//   useEffect(()=>{
-//     axios.get(`http://127.0.0.1:8000/person/completedcourse/`,{
-//         headers: {
-//             'Authorization': `token ${x}`,
-//           }
-//     }).then((res)=>{
-//         if(res.data){
-//           setCompletedCourse(res.data);
-//             // setDetails((prevVal)=>({...prevVal,[prevVal.course]:res.data[0].course}))
-//         }
-//     },(error)=>{
-//         console.log(error.response);
-//         console.log(error.request);
-//         console.log(error.message);
-
-//     })
-// },[]);
-  // //////////////////////////////////
-
 
 
   const classes = useStyles();
@@ -192,9 +172,7 @@ const[totalCredits,settotalCredits]=useState();
           
           <Tab style={{}} label="Logout" icon={<ExitToAppIcon />} aria-label="help" {...a11yProps(5)} />
           
-          {/* <Tab icon={<ShoppingBasket />} aria-label="shopping" {...a11yProps(4)} />
-          <Tab icon={<ThumbDown />} aria-label="up" {...a11yProps(5)} />
-          <Tab icon={<ThumbUp />} aria-label="down" {...a11yProps(6)} /> */}
+          
         </Tabs>
       </AppBar>
       <TabPanel  style={{marginTop:'5%'}}  value={value} index={0}>

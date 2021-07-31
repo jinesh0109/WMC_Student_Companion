@@ -45,7 +45,7 @@ const StyledTableCell = withStyles((theme) => ({
   
 const RequiredCredits=(props)=>{
     const RequiredCredits=props.props;
-    console.log(RequiredCredits);
+    // console.log(RequiredCredits);
     const classes = useStyles();
     let totcur=0;let totreq=0;
     if(RequiredCredits){
@@ -55,7 +55,7 @@ const RequiredCredits=(props)=>{
       for (let i = 0; i < RequiredCredits.requiredCredit.length; i++) {
         totreq += RequiredCredits.requiredCredit[i] ;
       }
-      console.log(totcur,totreq)
+      // console.log(totcur,totreq)
     }
   return (<>{RequiredCredits&&
       <div className={classes.tableHead} >

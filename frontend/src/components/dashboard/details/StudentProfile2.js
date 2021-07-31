@@ -47,14 +47,14 @@ const email=localStorage.getItem('email');
               color="textSecondary"
               variant="body1"
             >
-            <br/>
+            
             Enrollment Number:  {`${details.enr_num} `}
             </Typography>
             <Typography
               color="textSecondary"
               variant="body1"
             >
-            <br/><br/>
+            <br/>
              {`Email: ${email}`}
             </Typography>
             <Typography

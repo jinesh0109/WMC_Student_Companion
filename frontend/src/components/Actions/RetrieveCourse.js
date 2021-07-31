@@ -25,11 +25,11 @@ const RetrieveCourse=(props)=>{
     const x=localStorage.getItem('token');
 
     const{open,handleClickOpen,handleClose}=props
-    console.log(props)
+    // console.log(props)
     const {name,description,credit,faculty,cat,building,id}=props.props;
 
     const [detail,setDetail]=useState({name:name,description:description,credit:credit,faculty:faculty,cat:cat,building:building,id:id})
-    console.log(detail.id)
+    
     const [wholeData,setWholeData]=useState();
     
     //Material UI Part
@@ -61,7 +61,7 @@ const RetrieveCourse=(props)=>{
                    'Authorization': `token ${x}`,
                 }
             }).then((res)=>{
-                console.log(res)    
+                // console.log(res)    
                 setWholeData(res.data)
                 
             },

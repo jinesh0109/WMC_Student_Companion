@@ -3,6 +3,7 @@ from django.shortcuts import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic.list import ListView
 from rest_framework import generics
+from rest_framework import response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
@@ -96,17 +97,26 @@ class showStudent(generics.RetrieveUpdateDestroyAPIView):
     def get(self, request, *args, **kwargs):
         if(request.user.is_student):
             return HttpResponse('Unauthorized', status=401)
+        
         return self.retrieve(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):
         if(request.user.is_student):
             return HttpResponse('Unauthorized', status=401)
+        # userObj=NewUser.objects.get(email=request.user)
+        # request.data['user']=userObj.id
         return self.update(request, *args, **kwargs)
 
-    def delete(self, request, *args, **kwargs):
+    def delete(self, request, pk):
+        
         if(request.user.is_student):
             return HttpResponse('Unauthorized', status=401)
-        return self.destroy(request, *args, **kwargs)
+        stuObj=Student.objects.get(id=pk).user
+        userObj=NewUser.objects.get(email=stuObj)
+        userObj.delete()
+        return Response("Successsfully Deleted",status=200)
+        # return self.destroy(request, *args, **kwargs)
+        
 
 
 
@@ -132,7 +142,7 @@ class studentList(generics.ListCreateAPIView):
         # request.data['program']=prog_data['id']
         
         request.data['user']=user
-        print(request.data)
+        # print(request.data)
         s=Student(user=request.data['user'],name=request.data['name'],enr_num=request.data['enr_num'],
            program=prog )
         
@@ -189,17 +199,18 @@ class ToDoCreateList(generics.ListCreateAPIView):
     def get_queryset(self):
         stud_obj=Student.objects.get(user=self.request.user).id
         return (TodoData.objects.filter(student=stud_obj))
+        
     def post(self, request, *args, **kwargs):
         title=request.data['title']
         desc=request.data['desc']
         due_date=request.data['due_date']
-        # send_mail('New Task','Ok it is sent','temporary1209tp@gmail.com',[request.user])
-        # send_mail('Task Alert','This is your task notification email.\n\nThe following is your task detail:\nTitle:  '+title+'\n\n'
-        # +'This is your description:\n'+desc+'\n\n'+'Due Date: '+due_date+'\n'+
-        # 'Complete your Task before due date.',
-        # 'temporary1209tp@gmail.com',[request.user])
+        send_mail('New Task','Ok it is sent','temporary1209tp@gmail.com',[request.user])
+        send_mail('Task Alert','This is your task notification email.\n\nThe following is your task detail:\nTitle:  '+title+'\n\n'
+        +'This is your description:\n'+desc+'\n\n'+'Due Date: '+due_date+'\n'+
+        'Complete your Task before due date.',
+        'temporary1209tp@gmail.com',[request.user])
         request.data['student']=Student.objects.get(user=NewUser.objects.get(email= request.user)).id
-        print(request.data)
+        # print(request.data)
         return self.create(request, *args, **kwargs)
 
 class ToDoRetUpdDest(generics.RetrieveUpdateDestroyAPIView):
@@ -209,7 +220,7 @@ class ToDoRetUpdDest(generics.RetrieveUpdateDestroyAPIView):
     queryset=TodoData.objects.all()
     def put(self, request, *args, **kwargs):
         request.data['student']=Student.objects.get(user=NewUser.objects.get(email= request.user)).id
-        print(request.data)
+        # print(request.data)
         return self.update(request, *args, **kwargs)
 
 

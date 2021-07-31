@@ -16,8 +16,8 @@ const StudentProfile=()=>{
                 'Authorization': `token ${x}`,
               }
         }).then((res)=>{
-            console.log(res.data[0]);
-            console.log(res);
+            // console.log(res.data[0]);
+            // console.log(res);
             if(res.data){
                 setDetails(res.data[0]);
             }

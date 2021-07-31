@@ -111,6 +111,7 @@ const AddCourse=()=>{
                     'Authorization': `token ${x}`,
                  }
              }).then((res)=>{
+                setDetail((previousVal)=>({...previousVal,["faculty"]:res.data[0].id}));
                  setfacultyData(res.data);
              },
              (error)=>{
@@ -129,6 +130,7 @@ const AddCourse=()=>{
                      }
                  }).then((res)=>{
                      setBuildingData(res.data);
+                     setDetail((previousVal)=>({...previousVal,["building"]:res.data[0].id}));
                  },
                  (error)=>{
                      console.log('Server Error');

@@ -29,7 +29,7 @@ const CompleteTask=(props)=>{
     const tok=localStorage.getItem('token');
     const [open, setOpen] = React.useState(false);
     const [CompleteAlertId, setCompleteAlertId] = React.useState(0);
-    console.log(new Date(task.due_date).toISOString())
+    // console.log(new Date(task.due_date).toISOString())
 
    
    

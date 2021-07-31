@@ -32,12 +32,9 @@ const EnrollStudentData=(detail)=>{
 
     const courseDetail=detail.props;
     const studentDetail=detail.props1;
-    console.log(courseDetail);
-    console.log(studentDetail);
-    // if (courseDetail && courseDetail.cat)
-    //     console.log(courseDetail.cat[0]);
-    // else
-    //     console.log('Not Printed');
+    // console.log(courseDetail);
+    // console.log(studentDetail);
+    
    
 
     const useStyles = makeStyles((theme) => ({
@@ -49,7 +46,7 @@ const EnrollStudentData=(detail)=>{
           flex: 1,
         },
         heading: {
-            fontSize: theme.typography.pxToRem(15),
+            fontSize: theme.typography.pxToRem(19),
             flexBasis: '33.33%',
             flexShrink: 0,
           },
@@ -59,7 +56,7 @@ const EnrollStudentData=(detail)=>{
           },
           accColor:{
 
-            background:'linear-gradient(90deg, rgba(236,225,244,1) 19%, rgba(29,253,243,1) 100%, rgba(252,176,69,1) 100%)'
+            // background:'linear-gradient(90deg, rgba(236,225,244,1) 19%, rgba(29,253,243,1) 100%, rgba(252,176,69,1) 100%)'
         },
       }));
 
@@ -99,11 +96,7 @@ const EnrollStudentData=(detail)=>{
         
         const [checkedItems, setCheckedItems] = useState({});
         const handleChange = (event) => {
-            // console.log(event.target.name);
-            // console.log(event.target.checked);
-
             
-
             setCheckedItems({...checkedItems, [event.target.name] : event.target.checked });
 
         }
@@ -115,8 +108,7 @@ const EnrollStudentData=(detail)=>{
         const [checkedAll, setCheckedAll] = useState(false);
         
         const selectAll = (event) => {
-            // console.log(studentDetail[0].id);
-            // console.log(!checkedAll);
+            
             setCheckedAll(!checkedAll);
             // setCheckedItems({[studentDetail.map(li => li.id)]:true});
             
@@ -124,22 +116,18 @@ const EnrollStudentData=(detail)=>{
 
             studentDetail.map((li) =>
                 {
-                    // console.log(li.id);
-                    // console.log(checkedItems[li.id]);
-                    // return true
-                    // setCheckedItems({...checkedItems, [li.id] : true});
+                    
                     setCheckedItems((checkedItems) => {
                         return {...checkedItems, [li.id] : true}
                     });
                     
-                    // console.log(li.id,li.target.checked);
-                    // console.log(li.id , event.target.checked);
+                    
                     
                 }
 
                 );
             }
-            console.log(checkedItems);
+            // console.log(checkedItems);
             
            
             
@@ -160,7 +148,7 @@ const EnrollStudentData=(detail)=>{
                 }).then((res)=>{
                     
                     setEnrollDetail(res.data);
-                    console.log(res.data)
+                    // console.log(res.data)
                 },
                 (error)=>{
                     console.log('Server Error');
@@ -180,11 +168,13 @@ const EnrollStudentData=(detail)=>{
                 'Authorization': `token ${x}`,
               }
         }).then((res)=>{
-            console.log(res);
-            // window.location.reload();
+            // console.log(res);
+            window.location.reload();
         },(error)=>{
-            alert('Invalid credentials hua hai');
-            console.log(error.message);console.log(error.response);
+            alert('Some Students have been enrolled already,Please Select Again');
+            console.log(error.response);
+            console.log(error.message);
+            window.location.reload();
             
         });
         }
@@ -289,14 +279,16 @@ const EnrollStudentData=(detail)=>{
                                     aria-controls="panel1bh-content"
                                     id="panel1bh-header"
                                     >
-                                        <Typography className={classes.heading}>Student Name:{item.name}</Typography>
+                                        <Typography className={classes.heading}><span style={{fontWeight:'bold',fontSize:19}}>Student Name:</span>{item.name}</Typography>
                                         
-                                        <Typography className={classes.heading}>Enrollment Number: {item.enr_num}
+                                        <Typography className={classes.heading}><span style={{fontWeight:'bold',fontSize:19}}>Enrollment Number:</span> {item.enr_num}
+                                        &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  
                                         <Checkbox1 name={item.id}  value={item.id} checked={checkedItems[item.id]} onChange={handleChange}/>
                                         </Typography>
                                     </AccordionSummary>
                                     </Accordion>
                                     <Divider/>
+                                    <br/>
                                 {/* <Checkbox1 name={item.id}  value={item.id} checked={checkedItems.item&&checkedItems.item.id} onChange={handleChange}/> */}
                                 
                             </label>

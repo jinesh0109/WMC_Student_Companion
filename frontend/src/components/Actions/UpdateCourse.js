@@ -37,14 +37,7 @@ const UpdateCourse=(props)=>{
     const buildingData=props.props3;
     
     const [detail,setDetail]=useState({name:name,description:description,credit:credit,faculty:faculty,cat:cat,building:building,id:id})
-    // {name:'',description:'',credit:3,faculty:'',cat:[],building:'',id:id}
-    // const [detail,setDetail]=useState({})
-    console.log(cat)
-
-    // const [facultyData,setfacultyData]=useState();
-    // const[buildingData,setBuildingData]=useState();
-    // const[categoryData,setCategoryData]=useState();
-
+    
     const [checkedItems, setCheckedItems] = useState({});
 
     const Checkbox1 = props => (
@@ -79,86 +72,19 @@ const UpdateCourse=(props)=>{
 
     const classes = useStyles();
 
-    // const [open, setOpen] = React.useState(true);
-
-    //   const handleClickOpen = () => {
-    //     setOpen(true);
-    // };
-
-    // const handleClose = () => {
-    //     setOpen(false);
-    // };
+    
 
     const eventCom=()=>{
-        // <Alert severity="success">The Course Data Has Been Successfully Updated !!</Alert>
+    
         handleClose();
         window.location.reload()
-        
-        //  console.log('-----------------------Yes')
-        
+       
     }
   
 
     const x=localStorage.getItem('token');
 
-    //To Showcase The Data in drop-down box
-    // useEffect(()=>{
-    //      function getFacultyData(){
-    //           axios.get(`http://127.0.0.1:8000/course/faculty_list/`,{
-    //              headers:{
-    //                 'Authorization': `token ${x}`,
-    //              }
-    //          }).then((res)=>{
-                 
-    //              setfacultyData(res.data);
-    //          },
-    //          (error)=>{
-    //              console.log('Server Error');
-    //             }
-    //          );
-    //         }
-    //         getFacultyData();
-    //     },[] )
-
-    //     useEffect(()=>{
-    //          function getBuildingData(){
-    //             axios.get(`http://127.0.0.1:8000/course/building_list/`,{
-    //                  headers:{
-    //                     'Authorization': `token ${x}`,
-    //                  }
-    //              }).then((res)=>{
-    //                  setBuildingData(res.data);
-    //              },
-    //              (error)=>{
-    //                  console.log('Server Error');
-    //                 }
-    //              );
-    //             }
-    //             getBuildingData();
-    //         },[] )
-    
-
-    //         useEffect(()=>{
-    //              function getCategoryData(){
-    //                  axios.get(`http://127.0.0.1:8000/course/category_list/`,{
-    //                      headers:{
-    //                         'Authorization': `token ${x}`,
-    //                      }
-    //                  }).then((res)=>{
-    //                      setCategoryData(res.data);
-    //                      console.log(res)
-                         
-    //                  },
-    //                  (error)=>{
-    //                      console.log('Server Error');
-    //                     }
-    //                  );
-    //                 }
-    //                 getCategoryData();
-    //             },[] )
-
-
-
+   
 
     const UpdateFunction=()=>{
         // console.log(detail.id);

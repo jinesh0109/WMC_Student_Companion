@@ -12,7 +12,7 @@ const DeleteCourse=(deleteData)=>{
     
     const{delCourse,handleClose1,open}=deleteData
     deleteData=deleteData.props;
-    console.log(deleteData);
+    // console.log(deleteData);
     const tok=localStorage.getItem('token');
     
     // const [open, setOpen] = React.useState(false);

@@ -24,7 +24,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Divider from '@material-ui/core/Divider';
 import { createTheme, withStyles,  ThemeProvider } from '@material-ui/core/styles';
-import { red ,green} from '@material-ui/core/colors';
+import { red ,green, blue} from '@material-ui/core/colors';
 
 const Admin_course=(props)=>{
     const listCourses=props.props;
@@ -32,7 +32,7 @@ const Admin_course=(props)=>{
     const listCategory=props.props2;
     const listBuilding=props.props3;
 
-    console.log(listCourses)
+    // console.log(listCourses)
     // console.log(listCourses.name)
     
     const tok=localStorage.getItem('token');
@@ -43,11 +43,11 @@ const Admin_course=(props)=>{
     const ColorButton = withStyles((theme) => ({
         root: {
           color: theme.palette.getContrastText(red[500]),
-          backgroundColor: red[400],
+          backgroundColor: blue[500],
           marginTop:-50,
           marginLeft:40,
           '&:hover': {
-            backgroundColor: red[700],
+            backgroundColor: blue[700],
             
           },
         },
@@ -57,7 +57,9 @@ const Admin_course=(props)=>{
     const useStyles = makeStyles((theme) => ({
         
         root: {
-          width: '100%',
+            width: '98%',
+            display:'flex',
+            flexDirection:'column'
           
         },
         heading: {
@@ -105,13 +107,13 @@ const Admin_course=(props)=>{
             
             const faculties=res.data;
             // console.log(courses[0].faculty);
-            console.log(faculties);
+            // console.log(faculties);
             setListFaculty(()=>faculties)
             
             return faculties
 
         }).then( (faculties) => {
-            console.log(listFaculty);
+            // console.log(listFaculty);
             if(listCourses.length!=faculty_course.length&&listCourses&&faculties){
             loop1:
             for (const c in listCourses) {
@@ -119,20 +121,20 @@ const Admin_course=(props)=>{
                 for(const f in faculties){
                     if(listCourses[c]['faculty']===faculties[f]['id'])
                     {
-                        console.log(c['faculty']);
+                        // console.log(c['faculty']);
                         // faculty_course.push(listFaculty[f]['name']);
                         setFaculty_Course((preValue)=>{
                             return [...preValue,faculties[f]['name']]
                         })
-                        console.log(faculties[f]['name']);
+                        // console.log(faculties[f]['name']);
                         
-                        // console.log('helllllllllllllllllllllooooooooooooooooooooooooooooo');
+                        
                         break loop2;
                         
                     }
                 }
             }
-            console.log(faculty_course)
+            // console.log(faculty_course)
         }
             
         });
@@ -179,7 +181,7 @@ const [open, setOpen] = React.useState(true);
                                 //courses.name+"  "+ faculty_course[index] +"  "+courses.credit  
                                 // courses.name+'  '+courses.faculty[].name+' '+courses.credit
                                 <div className={classes.root}  key={courses.id}>
-                                    <Accordion className={classes.accColor} expanded={expanded === index} onChange={handleChange(index)}>
+                                    <Accordion  expanded={expanded === index} onChange={handleChange(index)}>
                                         <AccordionSummary
                                         expandIcon={<ExpandMoreIcon />}
                                         aria-controls="panel1bh-content"
@@ -239,6 +241,7 @@ const [open, setOpen] = React.useState(true);
                                         </AccordionDetails>
                                     </Accordion>
                                     <Divider/>
+                                    <br/>
                                 </div>
 
 

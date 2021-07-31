@@ -20,18 +20,18 @@ import Container from '@material-ui/core/Container';
 
 
 const Login=()=>{
-    function Copyright() {
-        return (
-          <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-              Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-          </Typography>
-        );
-      }
+    // function Copyright() {
+    //     return (
+    //       <Typography variant="body2" color="textSecondary" align="center">
+    //         {'Copyright © '}
+    //         <Link color="inherit" href="https://material-ui.com/">
+    //           Your Website
+    //         </Link>{' '}
+    //         {new Date().getFullYear()}
+    //         {'.'}
+    //       </Typography>
+    //     );
+    //   }
     const useStyles = makeStyles((theme) => ({
         body: {
             minHeight: '100vh',
@@ -93,9 +93,9 @@ const Login=()=>{
         }
         
             ).then((response)=>{
-                console.log(response.data);
+                // console.log(response.data);
                 if(response.data){
-                    console.log(response.data);
+                    // console.log(response.data);
                     localStorage.setItem('token',response.data.token);
                     localStorage.setItem('email',response.data.email);
                     localStorage.setItem('is_student',response.data.is_student);

@@ -23,7 +23,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Divider from '@material-ui/core/Divider';
 import { createTheme, withStyles,  ThemeProvider } from '@material-ui/core/styles';
-import { red ,green} from '@material-ui/core/colors';
+import { red ,green, blue} from '@material-ui/core/colors';
 import RetrieveStudent from '../../Actions/RetrieveStudent';
 
 
@@ -38,11 +38,11 @@ const Admin_Student=(props)=>{
     const ColorButton = withStyles((theme) => ({
         root: {
           color: theme.palette.getContrastText(red[500]),
-          backgroundColor: red[400],
+          backgroundColor: blue[500],
           marginTop:-50,
           marginLeft:40,
           '&:hover': {
-            backgroundColor: red[700],
+            backgroundColor: blue[700],
             
           },
         },
@@ -50,7 +50,12 @@ const Admin_Student=(props)=>{
     const useStyles = makeStyles((theme) => ({
         
         root: {
-          width: '100%',
+          width: '98%',
+          display:'flex',
+          flexDirection:'column'
+        //   justifyContent:'center',
+          
+          
           
         },
         heading: {
@@ -64,8 +69,10 @@ const Admin_Student=(props)=>{
         },
 
         accColor:{
+            
+            // border:'1px dashed black',
             // backgroundColor:'#fffb50',
-            background: 'linear-gradient(90deg, rgba(93,235,48,1) 0%, rgba(252,176,69,1) 100%, rgba(29,253,243,1) 100%)'
+            // background: 'linear-gradient(90deg, rgba(93,235,48,1) 0%, rgba(252,176,69,1) 100%, rgba(29,253,243,1) 100%)'
         },
       }));
 
@@ -113,33 +120,21 @@ const Admin_Student=(props)=>{
                                         </AccordionSummary>
                                         <AccordionDetails>
                                         <Typography>
-                                            <div>
+                                            
                                                 <span>
-                                                
+                                                &nbsp;&nbsp;
                                                 <RetrieveStudent props={student}/>
-                                                &nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 {student&&<UpdateStudent props={student}/>}
-                                                &nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <DeleteStudent props={student}/>
-                                                &nbsp;&nbsp;&nbsp;
-                                                {/* &nbsp;&nbsp;
-                                                <button onClick={(()=>(setoperner(student.id),handleClickOpen()))}><VisibilityIcon/></button>
-                                                {operner==student.id&&student&&<RetrieveCourse props={student} open={open} handleClickOpen={handleClickOpen} handleClose={handleClose}/>}
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                                <button onClick={(()=>(setoperner1(student.id),handleClickOpen()))}><CreateIcon/></button>
-                                                {operner1==student.id&&student&&<UpdateCourse props={student} props1={listFaculty1} props2={listCategory} props3={listBuilding} open={open} handleClickOpen={handleClickOpen} handleClose={handleClose}/>}
                                                 
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <button onClick={(()=>(setoperner2(student.id),setOpen(true),setDelCourse(student.id)))} > <DeleteIcon/></button>
-                                                {operner2==student.id && <DeleteCourse props={student} delCourse={delCourse} handleClose1={handleClose1} open={open}/>}
                                                 
-                                                 */}
                                                 </span>
                                                 
                                                 
                                                  {/* <DeleteCourse props={student}/> */}
-                                            </div>
+                                            
                                             <div>
                                             
                                                 <Grid container >
@@ -169,7 +164,9 @@ const Admin_Student=(props)=>{
                                         </AccordionDetails>
                                     </Accordion>
                                     <Divider/>
+                                    <br/>
                                 </div>
+                                
 
 
                             }

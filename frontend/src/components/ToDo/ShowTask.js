@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AllTask=(props)=>{
     const taskList=props.props;
-    console.log(taskList);
+    // console.log(taskList);
 
 
     const classes = useStyles();
@@ -48,7 +48,7 @@ const AllTask=(props)=>{
 
   //converting date to readable...
   const dateFormatter=(date)=>{
-    console.log(date.slice(0,9)+date.slice(11,19));
+    // console.log(date.slice(0,9)+date.slice(11,19));
     return date.slice(0,10)+' Time:'+date.slice(11,19);
   }
   return (

@@ -9,12 +9,12 @@ const AdminDashboard=()=>{
 
     
     return( 
-    <>
+    <div style={{backgroundColor:'lightblue',height:'100%'}}>
         <NavbarAdmin />
-        {/* <h1>Hello admin!!</h1> */}
+        
         
 
-    </>
+    </div>
     );
 };
 

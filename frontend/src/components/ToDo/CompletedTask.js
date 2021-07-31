@@ -7,7 +7,7 @@ const CompletedTask=(props)=>{
     const taskList=props.props;
     
    const altList= taskList.filter(function(task){
-        console.log(task.complete);    
+        // console.log(task.complete);    
         return (task.complete===true);
       },);
 

@@ -34,10 +34,10 @@ import CancelIcon from '@material-ui/icons/Cancel';
 
 function UpdateStudent1(props) {
     const[bol,setBol]=useState(0);
-    console.log(props);
-    const {name,enr_num,id,program}=props.props;
-    console.log(props.props.id)
-    const[detail,changeDetail]=useState({name:name,enr_num:enr_num,id:id,program:program});
+    // console.log(props);
+    const {name,enr_num,id,program,user}=props.props;
+    // console.log(props.props.id)
+    const[detail,changeDetail]=useState({name:name,enr_num:enr_num,id:id,program:program,user:user});
 
     const onDetailChange=(e)=>{
         changeDetail((prevVal)=>({...prevVal,[e.target.name]:e.target.value}))
@@ -52,7 +52,7 @@ function UpdateStudent1(props) {
             'Authorization': `token ${x}`,
           }
     }).then((res)=>{
-       console.log(res)
+    //    console.log(res)
         setProgOptions(res.data);
        
         
@@ -92,10 +92,11 @@ function UpdateStudent1(props) {
         setOpen(true); 
     }
 
+    const num1=parseInt(detail.id,10);
 
 
     const post=()=>{
-        axios.put(`http://127.0.0.1:8000/person/student/${detail.id}/`,{name:detail.name,enr_num:detail.enr_num,user:detail.id,program:detail.program},{
+        axios.put(`http://127.0.0.1:8000/person/student/${num1}/`,{name:detail.name,enr_num:detail.enr_num,user:detail.user},{
             headers: {
                 'Authorization': `token ${x}`,
               }
@@ -132,29 +133,7 @@ function UpdateStudent1(props) {
                 fullWidth
             />
             
-            {/* {detail.program&&<form className={classes.container}>
-                <FormControl className={classes.formControl}>
-                    <FormLabel >Programme Name:</FormLabel>
-                    <Select
-                    native
-                    id="program"
-                    name='program'
-                    onChange={onDetailChange} value={detail.program.id}
-                    // input={<Input id="demo-dialog-native" />}
-                    >
-                    
-                    {progOptions &&
-                        progOptions.map((choice)=>{
-                        // console.log(choice.name);
-                            return <option key={choice.id} value={choice.id}>{choice.name} </option>
-                        })
-                    }
-                    </Select>
-                </FormControl>
             
-            </form>
-            } */}
-        
             
            
             
@@ -172,20 +151,6 @@ function UpdateStudent1(props) {
             </DialogActions>
         </Dialog>
         
-
-
-
-
-            {/* <label htmlFor="name" >Name:</label>
-            <input name="name" type="text" value={detail.name} onChange={onDetailChange}></input>
-            <br/>
-            <label htmlFor="enr_num">Enr_num:</label>
-            <input name="enr_num" value={detail.enr_num} onChange={onDetailChange} type="text" ></input>
-            
-
-            <button onClick={post} >Update</button> 
-            <br/>
-            <button onClick={()=>{setBol(0)}} ><CancelIcon/> </button>  */}
             </> 
             )
             }

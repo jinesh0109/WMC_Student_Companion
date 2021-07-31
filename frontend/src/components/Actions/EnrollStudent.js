@@ -36,11 +36,13 @@ const EnrollStudent=(enrolldata)=>{
     const useStyles = makeStyles((theme) => ({
         
         root: {
-          width: '100%',
+            width: '98%',
+            display:'flex',
+            flexDirection:'column'
           
         },
         heading: {
-          fontSize: theme.typography.pxToRem(15),
+        fontSize: 19,
           flexBasis: '33.33%',
           flexShrink: 0,
         },
@@ -51,7 +53,7 @@ const EnrollStudent=(enrolldata)=>{
 
         accColor:{
             // backgroundColor:'#fffb50',
-            background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(17,255,180,1) 0%, rgba(0,212,255,1) 100%)'
+            // background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(17,255,180,1) 0%, rgba(0,212,255,1) 100%)'
         },
       }));
 
@@ -77,7 +79,7 @@ const EnrollStudent=(enrolldata)=>{
         return(
             <>
              
-             <h1 style={{textAlign:'center',fontFamily:'cursive',background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(17,255,180,1) 0%, rgba(0,212,255,1) 100%)',color:'blue',marginLeft:40,marginTop:-30,border: '10 solid black',borderRadius:20
+             <h1 style={{textAlign:'center',fontFamily:'cursive',color:'blue',marginLeft:'30%',marginTop:-30,marginRight:'30%',border: '2px solid blue',borderRadius:20
                 }}>Course List  </h1>
             <ul>
             {
@@ -107,6 +109,7 @@ const EnrollStudent=(enrolldata)=>{
                                     </AccordionDetails>
                                 </Accordion>
                                 <Divider/>
+                                <br/>
                             </div>
                             }
 

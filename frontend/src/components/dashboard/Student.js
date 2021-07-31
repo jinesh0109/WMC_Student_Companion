@@ -16,7 +16,7 @@ const StudentDash=()=>{
                 'Authorization': `token ${x}`,
               }
         }).then((res)=>{
-            console.log(res.data[0]);
+            // console.log(res.data[0]);
             
             if(res.data){
                 setDetails(res.data[0]);

@@ -85,8 +85,10 @@ const AddStudent=()=>{
             'Authorization': `token ${x}`,
           }
     }).then((res)=>{
-       
+
+        setDetail((previousVal)=>({...previousVal,["program"]:res.data[0].id}));
         setProgOptions(res.data);
+        
        
         
     },(error)=>{
@@ -210,33 +212,12 @@ const AddStudent=()=>{
 
             
 
-            {/* <span>Programme:  </span>
-            {progOptions &&       
-                <select label='program' name='program' onChange={changeDetail} value={detail.program.id}   >
-                    {
-                        
-                        
-                        progOptions.map((choice)=>{
-                            
-                            return <option key={choice.id} value={choice.id} >{choice.name}</option>
-                            
-                            
-                        })
-                        
-                    }
-               
-               
-            </select>
-            } <br/> */}
-
+            
 
 
 
           
-            <br/><br/> 
             
-            <button onClick={handleClick}>Cancel</button>
-            <button onClick={send}>Submit</button>
             
         </>
     );
