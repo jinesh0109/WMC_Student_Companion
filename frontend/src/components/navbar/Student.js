@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     width: '100%',
     // backgroundColor: red[500],
-    
+    backgroundColor: '#F0F8FF',
     
       
       // background: 'linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(70,252,232,1) 50%, rgba(187,111,199,1) 100%)'
@@ -150,7 +150,8 @@ const[totalCredits,settotalCredits]=useState();
   }
   return (
     <div className={classes.root}  >
-      <AppBar position="static" style={{ position: "fixed",top: 0,    }}>
+      <AppBar  style={{ position: "fixed",top: 0 ,backgroundColor:'#4169E1'  }}>
+
         <Tabs
           value={value}
           onChange={handleChange}

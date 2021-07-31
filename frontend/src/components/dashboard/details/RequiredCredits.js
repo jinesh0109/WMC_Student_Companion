@@ -11,6 +11,8 @@ const StyledTableCell = withStyles((theme) => ({
     head: {
       backgroundColor: theme.palette.common.black,
       color: theme.palette.common.white,
+      // fontWeight:'bold',
+      fontWeight:'bold',
     },
     body: {
       fontSize: 14,
@@ -60,7 +62,7 @@ const RequiredCredits=(props)=>{
   return (<>{RequiredCredits&&
       <div className={classes.tableHead} >
     <TableContainer  component={Paper}>
-      <Table style={{background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(17,255,180,1) 0%, rgba(0,212,255,1) 100%)'}} className={classes.table} aria-label="customized table">
+      <Table style={{}} className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Category</StyledTableCell>

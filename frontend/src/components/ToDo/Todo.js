@@ -11,6 +11,7 @@ import ShowTask from './ShowTask';
 import '../../App.css';
 const useStyles = makeStyles((theme) => ({
   root: {
+    backgroundColor: '#F0F8FF',
     '& > *': {
       margin: theme.spacing(2),
       
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     
   },
   styleh1:{
-            textAlign:'center',fontFamily:'cursive',backgroundColor:'yellow',
+            textAlign:'center',fontFamily:'cursive',
             
            
             
@@ -59,8 +60,11 @@ export default function ContainedButtons(props) {
   return (
     <div className="todoH1">
     <h1></h1>
-    <h1 style={{color:'black',backgroundColor:'white',marginTop:100}}>  Hello {username},Come on Dude Start Working! Do your Tasks or die!!</h1>
+    
+    
     <div className={classes.root}>
+    <br/>
+    <h1 style={{color:'black',backgroundColor:'#F0F8FF'}}>  Hello {username},Come on Dude Start Working! Do your Tasks or die!!</h1>
       <Button onClick={()=>{setShowPage(0)}} variant="contained" color="secondary">All Tasks</Button>
       <Button onClick={()=>{setShowPage(1)}} variant="contained" color="primary">
         Create Task

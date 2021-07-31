@@ -12,7 +12,7 @@ import CompleteTask from '../Actions/CompleteTask';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      backgroundColor:'#d5ff80',
+      // backgroundColor:'#d5ff80',
       // background: 'linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(70,252,232,1) 50%, rgba(187,111,199,1) 100%)'
 
     },
@@ -52,11 +52,12 @@ const AllTask=(props)=>{
     return date.slice(0,10)+' Time:'+date.slice(11,19);
   }
   return (
-    <div >
+    <div style={{backgroundColor: '#F0F8FF',}}>
       
      {taskList&&
         taskList.map((task)=>{
             return (
+              <>
                 <Accordion className={classes.root} expanded={expanded === `${task.id}`} onChange={handleChange(`${task.id}`)}>
                     <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -81,6 +82,8 @@ const AllTask=(props)=>{
                         </Typography>
                     </AccordionDetails>
             </Accordion>
+            <br/>
+            </>
             )
         })
      }

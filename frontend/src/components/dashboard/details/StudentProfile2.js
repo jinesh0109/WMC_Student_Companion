@@ -26,7 +26,7 @@ const email=localStorage.getItem('email');
     
  return (
     <>
-      <Card >
+      <Card style={{backgroundColor:'#F0F8FF'}}>
         <CardContent>
           <Box
             sx={{
@@ -66,7 +66,7 @@ const email=localStorage.getItem('email');
             </Typography>
           </Box>
         </CardContent>
-        <Divider />
+        
         
       </Card>
   </>

@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent:'center',
     // backgroundColor:'pink',
     overflowY:'auto',
-    background: 'linear-gradient(90deg, rgba(224,238,174,1) 0%, rgba(70,230,16,1) 51%, rgba(148,233,199,1) 100%)',  
+    // background: 'li  near-gradient(90deg, rgba(224,238,174,1) 0%, rgba(70,230,16,1) 51%, rgba(148,233,199,1) 100%)',  
 
   },
   
@@ -224,6 +224,7 @@ export default function RecipeReviewCard(props) {
             })
           }
         </div>
+        
       }
       <br/>
     </Card>
@@ -232,6 +233,7 @@ export default function RecipeReviewCard(props) {
     })
     }
     </div>
+    <br/>
     </>
   );
 }
