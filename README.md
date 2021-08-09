@@ -5,5 +5,7 @@ their academic progress. A student have sections like TODO list, course list, re
 Admin have sections like Course , Student , Enroll Student.
 
 Tech Stack:
+
 React for Frontend
+
 Django for backend
